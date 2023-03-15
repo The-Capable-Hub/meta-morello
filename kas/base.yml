@@ -9,6 +9,9 @@ defaults:
 
 repos:
   meta-morello:
+    layers:
+      meta-morello:
+      meta-morello-toolchain:
 
   meta-arm:
     url: https://git.yoctoproject.org/meta-arm
