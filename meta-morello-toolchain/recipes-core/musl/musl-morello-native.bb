@@ -1,5 +1,7 @@
-inherit llvm-morello-native native
-require musl-morello-${MORELLO_ARCH}.inc
+inherit native
+require recipes-core/musl/musl-morello-${MORELLO_ARCH}.inc
+
+TOOLCHAIN   = "${MORELLO_TOOLCHAIN}"
 
 DESCRIPTION = " That is right, we have a native libc sysroot that is needed as an intermediate step \
 to provide crt and compiler-rt that will be used by the cross compiler, this recipe exist to avoid having \

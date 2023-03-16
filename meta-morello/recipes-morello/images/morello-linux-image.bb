@@ -17,7 +17,7 @@ require ${MACHINE_LINUX_REQUIRE}
 
 PACKAGE_ARCH         = "${MACHINE_ARCH}"
 
-DEPENDS             += "virtual/kernel virtual/grub-efi morello-initramfs mtools-native e2fsprogs-native coreutils-native bc-native util-linux-native"
+DEPENDS             += "virtual/kernel grub-efi morello-initramfs mtools-native e2fsprogs-native coreutils-native bc-native util-linux-native"
 PROVIDES             = "${OUTPUTS_NAME}"
 
 ESP_SIZE             = "100"
@@ -146,7 +146,7 @@ do_install() {
 
 do_deploy() {
     install -d ${DEPLOYDIR}/ESP
-    install ${D}/${OUTPUTS_NAME}.img ${DEPLOYDIR}/${OUTPUTS_NAME}-${MORELLO_ARCH}-${TCLIBC}.img
+    install ${D}/${OUTPUTS_NAME}.img ${DEPLOYDIR}/${OUTPUTS_NAME}-${TCLIBC}.img
     install ${D}/${ESP_IMAGE}.img ${DEPLOYDIR}/ESP/${ESP_IMAGE}.img
 
 }

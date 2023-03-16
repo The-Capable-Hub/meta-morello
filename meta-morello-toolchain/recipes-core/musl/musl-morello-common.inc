@@ -4,6 +4,8 @@ LICENSE            = "MIT"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}:"
 
+DEPENDS:remove:toolchain-llvm-morello = "virtual/musl-morello"
+
 SUMMARY = "CHERI enabled musl libc"
 SRC_URI = " \
     git://git.morello-project.org/morello/musl-libc;protocol=https;branch=${SRCBRANCH} \
@@ -11,7 +13,7 @@ SRC_URI = " \
 "
 
 # morello-release-1.5.0
-SRCREV = "df8f6409fb58efe35a3300b91a1f1941e2f89022"
+SRCREV    = "df8f6409fb58efe35a3300b91a1f1941e2f89022"
 SRCBRANCH = "morello/master"
 
 LIC_FILES_CHKSUM  = "file://COPYRIGHT;md5=b03f1cc25363d094011f8f4fd8bcfb68"

@@ -1,9 +1,8 @@
-inherit llvm-morello-native
 
 COMPATIBLE_MACHINE = "morello"
 SECTION            = "libs"
 
-DEPENDS:append     = " virtual/musl-morello-libs-native"
+TOOLCHAIN          = "${MORELLO_TOOLCHAIN}"
 
 MUSL_LDSO_ARCH = "aarch64_purecap"
 

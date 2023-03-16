@@ -1,11 +1,13 @@
-inherit cmake llvm-morello-native native
-require musl-morello-${MORELLO_ARCH}.inc
+inherit cmake native
+require recipes-core/musl/musl-morello-${MORELLO_ARCH}.inc
+
+TOOLCHAIN      = "${MORELLO_TOOLCHAIN}"
 
 DESCRIPTION    = "Libraries that go into the clang resource folder, \
                   search path for that folder is relative to clang directory itself."
 
-DEPENDS        += "musl-morello-native"
-PROVIDES       = "virtual/musl-morello-libs-native"
+DEPENDS       += "musl-morello-native"
+PROVIDES       = "virtual/llvm-morello-runtime-native"
 
 B_COMPILERRT   = "${WORKDIR}/build_compiler_rt"
 S_CRT          = "${LLVM_SHARED_SOURCE}/compiler-rt/lib/crt"
@@ -32,7 +34,6 @@ BUILD_READELF     = "${LLVM_PATH}/llvm-readelf"
 BUILD_LD          = "${LLVM_PATH}/ld.lld"
 BUILD_LTO         = "-fuse-ld=lld"
 BUILD_HOSTCC      = "${LLVM_PATH}/clang"
-
 
 do_install() {
 
