@@ -1,9 +1,12 @@
-inherit llvm-morello-native native
+inherit native
 
 SUMMARY      = "Gen init cpio"
 DESCRIPTION  = "Gen init cpio"
 HOMEPAGE     = "http://llvm.org"
 LICENSE      = "GPL-2.0-only"
+
+TOOLCHAIN    = "llvm-morello"
+
 
 OUTPUTS_NAME = "gen-init-cpio"
 PROVIDES     = "${OUTPUTS_NAME}-native"
