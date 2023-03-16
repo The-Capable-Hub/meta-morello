@@ -1,9 +1,11 @@
-inherit python3native llvm-morello-native
+inherit python3native
 
 COMPATIBLE_MACHINE = "morello"
 SUMMARY            = "EDK2 to be compiled with LLVM Morello"
 OUTPUTS_NAME       = "uefi"
 SECTION            = "firmware"
+
+TOOLCHAIN          = "${MORELLO_TOOLCHAIN}"
 
 MACHINE_EDK2_REQUIRE ?= ""
 MACHINE_EDK2_REQUIRE:morello-fvp = "edk2-firmware-morello-fvp.inc"
