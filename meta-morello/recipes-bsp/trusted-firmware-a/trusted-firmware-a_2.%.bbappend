@@ -1,9 +1,11 @@
-inherit llvm-morello-native
+
 
 COMPATIBLE_MACHINE = "morello"
 SUMMARY            = "TF-A to be compiled with LLVM Morello"
 OUTPUTS_NAME       = "trusted-firmware-a"
 SECTION            = "firmware"
+
+TOOLCHAIN          = "${MORELLO_TOOLCHAIN}"
 
 MACHINE_TFA_REQUIRE ?= ""
 MACHINE_TFA_REQUIRE:morello-fvp = "tfa-firmware-morello-fvp.inc"
@@ -11,7 +13,7 @@ MACHINE_TFA_REQUIRE:morello-soc = "tfa-firmware-morello-soc.inc"
 
 require ${MACHINE_TFA_REQUIRE}
 
-PROVIDES          += "virtual/${OUTPUTS_NAME}"
+PROVIDES   += "virtual/${OUTPUTS_NAME}"
 
 SRC_URI     = "gitsm://git.morello-project.org/morello/trusted-firmware-a;protocol=https;name=tfa;branch=${SRCBRANCH}"
 SRCREV_tfa  = "3ce2815936774fe924ec7538151b71085c2f18d9"
