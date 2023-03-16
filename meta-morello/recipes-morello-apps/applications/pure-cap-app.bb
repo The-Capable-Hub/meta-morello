@@ -1,4 +1,4 @@
-inherit pure-cap-application llvm-morello-native
+inherit pure-cap-application
 
 COMPATIBLE_MACHINE = "morello"
 SUMMARY            = "Simple capability application"
@@ -6,6 +6,8 @@ DESCRIPTION        = "Application used in the series of blogs found @ https://ww
 OUTPUTS_NAME       = "pure-cap-app"
 LICENSE            = "MIT"
 LIC_FILES_CHKSUM   = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
+
+TOOLCHAIN          = "${MORELLO_TOOLCHAIN}"
 
 PROVIDES           = "${OUTPUTS_NAME}"
 RDEPENDS:${PN}     = "musl-libc"

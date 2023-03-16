@@ -2,8 +2,6 @@ OUTPUTS_NAME       ?= "pure-cap-app-default-name"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}:${THISDIR}/${PN}:"
 
-DEPENDS  += "virtual/musl-morello"
-
 MUSL_HOME = "${STAGING_DIR_TARGET}${MUSL_INSTALL_DIR}"
 
 INHIBIT_SYSROOT_STRIP       = "1"
