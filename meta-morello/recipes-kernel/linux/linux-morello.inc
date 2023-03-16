@@ -1,4 +1,4 @@
-inherit llvm-morello-native
+
 require recipes-kernel/linux/linux-yocto.inc
 COMPATIBLE_MACHINE = "morello"
 SUMMARY            = "Morello Linux kernel fork"
@@ -6,10 +6,14 @@ DESCRIPTION        = "CHERI aware Linux kernel"
 OUTPUTS_NAME       = "morello-linux"
 SECTION            = "kernel"
 
+TOOLCHAIN          = "${MORELLO_TOOLCHAIN}"
+
 FILESEXTRAPATHS:prepend := "${THISDIR}:${THISDIR}/${PN}:"
 
 DEPENDS                 += "rsync-native"
 PROVIDES                += "virtual/${OUTPUTS_NAME}"
+
+DEPENDS:remove:toolchain-llvm-morello = "virtual/musl-morello"
 
 SRC_URI = " \
     git://git.morello-project.org/morello/kernel/linux;protocol=https;nobranch=1 \
