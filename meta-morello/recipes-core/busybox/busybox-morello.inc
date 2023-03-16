@@ -1,9 +1,11 @@
-inherit llvm-morello-native
+
 
 COMPATIBLE_MACHINE = "morello"
 SUMMARY            = "CHERI enabled busybox"
 LICENSE            = "GPL-2.0-only"
 SECTION            = "base"
+
+TOOLCHAIN          = "${MORELLO_TOOLCHAIN}"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}:${THISDIR}/${PN}:"
 
