@@ -5,9 +5,8 @@ MACHINEOVERRIDES =. "morello"
 PREFERRED_PROVIDER_virtual/kernel = "linux-morello"
 PREFERRED_VERSION_virtual/kernel = "1.5"
 
-LLVM_SHARED_SOURCE ?= "${TMPDIR}/work-shared/${MACHINE}/llvm-morello-source"
-
 MUSL_INSTALL_DIR ??=""
+MORELLO_TOOLCHAIN ??= "llvm-morello"
 
 C64_ARCH_TRIPLE = "aarch64-linux-musl_purecap"
 A64_ARCH_TRIPLE = "aarch64-linux-gnu"
