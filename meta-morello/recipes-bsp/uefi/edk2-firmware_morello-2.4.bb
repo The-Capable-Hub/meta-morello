@@ -1,8 +1,8 @@
 inherit python3native
-
+require recipes-bsp/uefi/edk2-firmware.inc
 COMPATIBLE_MACHINE = "morello"
 SUMMARY            = "EDK2 to be compiled with LLVM Morello"
-OUTPUTS_NAME       = "uefi"
+OUTPUTS_NAME       = "edk2-firmware"
 SECTION            = "firmware"
 
 TOOLCHAIN          = "${MORELLO_TOOLCHAIN}"
@@ -30,7 +30,6 @@ EDK2_NON_OSI_SRC_URI   = "git://github.com/tianocore/edk2-non-osi;branch=master;
 SRCREV_edk2-non-osi    = "0320db977fb27e63424b0953a3020bb81c89e8f0"
 SRCREV_edk2            = "ce510c33dfc354e262ccd71619add069876d6a08"
 SRCREV_edk2-platforms  = "6bae2381d664e668875720e7eb86f751cb1de373"
-PV                     = "git${SRCPV}"
 
 EDK2_BUILD_RELEASE = "0"
 
