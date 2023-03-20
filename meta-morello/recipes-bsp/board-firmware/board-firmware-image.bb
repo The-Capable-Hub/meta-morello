@@ -18,7 +18,7 @@ PACKAGE_ARCH       = "${MACHINE_ARCH}"
 BB_DONT_CACHE      = "1"
 
 DEPENDS           += "virtual/board-firmware virtual/scp-firmware \
-                      virtual/trusted-firmware-a virtual/uefi virtual/grub-efi \
+                      virtual/trusted-firmware-a virtual/edk2-firmware grub-efi \
                       mtools-native fiptool-native"
 
 PROVIDES           = "virtual/board-firmware-image"
@@ -47,7 +47,7 @@ do_configure[noexec] = "1"
 do_compile[noexec]   = "1"
 do_install[depends] += "virtual/board-firmware:do_populate_sysroot"
 do_install[depends] += "virtual/scp-firmware:do_populate_sysroot"
-do_install[depends] += "virtual/uefi:do_populate_sysroot"
+do_install[depends] += "virtual/edk2-firmware:do_populate_sysroot"
 do_install[depends] += "virtual/trusted-firmware-a:do_populate_sysroot"
 
 do_install:prepend() {
