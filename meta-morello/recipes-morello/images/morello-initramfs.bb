@@ -50,3 +50,8 @@ do_deploy() {
   install ${D}/${OUTPUTS_NAME}/initramfs ${DEPLOYDIR}/${OUTPUTS_NAME}/initramfs
 }
 addtask deploy after do_install
+
+do_image_complete() {
+  echo "Image complete"
+}
+addtask image_complete before do_build
