@@ -11,6 +11,8 @@ PREFERRED_VERSION_trusted-firmware-a = "morello-2.7"
 PREFERRED_PROVIDER_virtual/kernel = "linux-morello"
 PREFERRED_VERSION_virtual/kernel  = "morello-1.5"
 
+PREFERRED_VERSION_musl            = "morello-1.5"
+
 GDBVERSION                        = "morello-11.0"
 
 MUSL_INSTALL_DIR ??=""

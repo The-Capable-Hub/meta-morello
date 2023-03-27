@@ -18,7 +18,6 @@ SRCBRANCH = "morello/master"
 
 LIC_FILES_CHKSUM  = "file://COPYRIGHT;md5=b03f1cc25363d094011f8f4fd8bcfb68"
 
-PV           = "git${SRCPV}"
 S            = "${WORKDIR}/git"
 B            = "${WORKDIR}/build"
 
