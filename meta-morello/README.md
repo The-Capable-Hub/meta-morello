@@ -30,13 +30,13 @@ To run the FVP model:
 ```
 $ cd poky  
 $ . oe-init-build-env ../build  
-$ ./../meta-arm/scripts/runfvp --console tmp-fvp/deploy/images/morello-fvp/rootfs-morello-fvp.fvpconf  
+$ ./../meta-arm/scripts/runfvp --console tmp-fvp/deploy/images/morello-fvp/usb-image-morello-fvp.fvpconf  
 ```
 or  
 ```
 $ cd poky  
 $ . oe-init-build-env ../build  
-$ ./../meta-arm/scripts/runfvp tmp-fvp/deploy/images/morello-fvp/rootfs-morello-fvp.fvpconf  
+$ ./../meta-arm/scripts/runfvp tmp-fvp/deploy/images/morello-fvp/usb-image-morello-fvp.fvpconf  
 ```
 Then inspect the FVP console output for information on your uart_ap port:  
 ```
@@ -53,7 +53,7 @@ Images
 
 The outputs can be found under build/temp/deploy/images:  
 - board-firmware-sd-image.img goes on the SD card  via DD
-- morello-linux-image..img goes on the USB via DD
+- usb-image-morello-fvp/soc.wic goes on the USB via DD
 
 Linux and musl-libc
 -------------------
