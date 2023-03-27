@@ -32,3 +32,22 @@ GLOBAL_LIB_TRIPLE  ?= "${C64_LIB_TRIPLE}"
 GLOBAL_ARCH_FLAGS  ?= "${C64_ARCH_FLAGS}"
 
 APP_DIR ?= "pure-cap-apps"
+
+KERNEL_IMAGETYPE       = "Image"
+
+IMAGE_FSTYPES          += "wic"
+
+WKS_FILE               ?= "morello-efidisk.wks"
+WKS_FILE_DEPENDS:append = " ${EXTRA_IMAGEDEPENDS}"
+
+EXTRA_IMAGEDEPENDS     += "virtual/scp-firmware"
+EXTRA_IMAGEDEPENDS     += "virtual/trusted-firmware-a"
+EXTRA_IMAGEDEPENDS     += "virtual/edk2-firmware"
+EXTRA_IMAGEDEPENDS     += "board-firmware-image"
+
+EFI_PROVIDER           ?= "grub-efi"
+MACHINE_FEATURES       += "efi"
+
+INITRAMFS_MAXSIZE      = "640000"
+INITRAMFS_IMAGE        = "morello-initramfs"
+INITRAMFS_IMAGE_BUNDLE = "0"
