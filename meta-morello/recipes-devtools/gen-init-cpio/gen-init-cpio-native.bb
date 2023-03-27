@@ -19,18 +19,19 @@ SRC_URI = " \
 
 SRCREV = "87d06928f90fe910311210a0149d03f3420f593c"
 
-S             = "${WORKDIR}/git/usr"
+S             = "${WORKDIR}/git"
 
 FILES:${PN}   = "${bindir}/${OUTPUTS_NAME}"
 
 do_configure[noexec] = "1"
 
 do_compile(){
+    cd usr
     mkdir -p ${B}/${OUTPUTS_NAME}
     oe_runmake gen_init_cpio
 }
 
 do_install(){
     install -d ${D}${bindir}
-    install -m 0744 ${S}/gen_init_cpio ${D}${bindir}/gen_init_cpio
+    install -m 0744 ${S}/usr/gen_init_cpio ${D}${bindir}/gen_init_cpio
 }
