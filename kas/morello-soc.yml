@@ -4,4 +4,4 @@ header:
     - base.yml
 machine: morello-soc
 target:
-  - morello-linux-image
+  - core-image-minimal
