@@ -5,17 +5,11 @@ header:
 machine: morello-fvp
 
 local_conf_header:
-    testimage-config: |
+    fvp-config: |
 
         LICENSE_FLAGS_ACCEPTED:append = " Arm-FVP-EULA"
 
-        TESTIMAGE_AUTO = "1"
-
-        IMAGE_CLASSES:append = " testimage"
         INHERIT             += "fvpboot"
-
-        TEST_TARGET = "OEFVPSerialTarget"
-        TEST_SUITES = "linuxboot"
 
         FVP_CONSOLES[default] = "terminal_uart_ap"
 target:
