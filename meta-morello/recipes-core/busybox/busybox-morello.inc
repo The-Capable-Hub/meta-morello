@@ -29,8 +29,8 @@ EXTRA_OEMAKE = "\
                 KHEADERS='${STAGING_KERNEL_BUILDDIR}/kernel-headers/include/' \
             "
 
-FILES:${PN}  += "/busybox/busybox"
-SYSROOT_DIRS += "/busybox"
+FILES:${PN}  += "/busybox-morello/busybox"
+SYSROOT_DIRS += "/busybox-morello"
 
 INHIBIT_SYSROOT_STRIP       = "1"
 INHIBIT_PACKAGE_STRIP       = "1"
@@ -49,6 +49,6 @@ do_compile() {
 }
 
 do_install() {
-    install -d ${D}/busybox
-    install -m 0755  ${S}/busybox ${D}/busybox/busybox
+    install -d ${D}/busybox-morello
+    install -m 0755  ${S}/busybox ${D}/busybox-morello/busybox
 }

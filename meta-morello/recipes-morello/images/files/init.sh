@@ -1,34 +1,42 @@
-#!/bin/busybox sh
+#!/busybox-morello/busybox sh
 
 mount() {
-    /bin/busybox mount "$@"
+    /busybox-morello/busybox mount "$@"
 }
 
 umount() {
-    /bin/busybox umount "$@"
+    /busybox-morello/busybox umount "$@"
 }
 
 grep() {
-    /bin/busybox grep "$@"
+    /busybox-morello/busybox grep "$@"
 }
 
 cp() {
-    /bin/busybox cp "$@"
+    /busybox-morello/busybox cp "$@"
 }
 
 mkdir() {
-    /bin/busybox mkdir "$@"
+    /busybox-morello/busybox mkdir "$@"
 }
 
 switch_root () {
-    /bin/busybox switch_root "$@"
+    /busybox-morello/busybox switch_root "$@"
 }
 
 sed () {
-    /bin/busybox sed "$@"
+    /busybox-morello/busybox sed "$@"
 }
 
 echo "Running init script"
+
+mkdir -m 0755 bin
+mkdir -m 0755 include
+mkdir -m 0755 share
+mkdir -m 0755 proc
+mkdir -m 0755 sys
+
+cp /busybox-morello/busybox /bin/busybox
 
 mount -t proc proc /proc
 grep -qE $'\t'"devtmpfs$" /proc/filesystems && mount -t devtmpfs dev /dev

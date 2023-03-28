@@ -49,5 +49,5 @@ EFI_PROVIDER           ?= "grub-efi"
 MACHINE_FEATURES       += "efi"
 
 INITRAMFS_MAXSIZE      = "640000"
-INITRAMFS_IMAGE        = "morello-initramfs"
+INITRAMFS_IMAGE        = "morello-initramfs-image"
 INITRAMFS_IMAGE_BUNDLE = "0"
