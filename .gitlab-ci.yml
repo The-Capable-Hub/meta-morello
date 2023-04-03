@@ -62,8 +62,10 @@ check-layers:
   coverage: '/Coverage: \d+/'
   script:
     - kas shell --update --force-checkout kas/base.yml --command \
-      "yocto-check-layer-wrapper $CI_PROJECT_DIR -n --dependency $KAS_WORK_DIR/meta-arm/meta-arm $KAS_WORK_DIR/meta-arm/meta-arm-toolchain"
-
+      "yocto-check-layer-wrapper $CI_PROJECT_DIR/$LAYER -n --dependency $CI_PROJECT_DIR/meta-* $KAS_WORK_DIR/meta-arm/meta-arm $KAS_WORK_DIR/meta-arm/meta-arm-toolchain"
+  parallel:
+    matrix:
+      - LAYER: [meta-morello, meta-morello-toolchain]
 #
 # Build stage, the actual build jobs
 #

@@ -1,98 +1,51 @@
 meta-morello
 ============
 
-Meta-morello provides the layer required to build the firmware that lives on the SD card and a `Morello` enabled
+Meta-morello provides the layers required to build the firmware that lives on the SD card and a `Morello` enabled
 `Linux` kernel for the Morello System Development Platform.  
 
 - Use the provided `kas` scripts to get all of the dependencies.
 - Read on how to get and use `kas` here [1]
 
-Booting the hardware
---------------------
+* meta-morello
 
-For information on how to boot the hardware and how the hardware is booting see [2] and [3].
+This layer contains most of the code recipes: firmware, kernel, FVP etc.
 
-Machines
---------
+* meta-morello-toolchain
 
-The machines have been split into:  
-- morello-soc for the actual hardware
-- morello-fvp for running a `FVP` image using `runfvp` script @ `meta-arm`
-
-Building images
----------------
-
-```
-$ kas build ./kas/morello-soc.yml  
-```
-or  
-```
-$ kas build ./kas/morello-fvp.yml  
-```
-FVP
----
-
-To run the FVP model:  
-```
-$ cd poky  
-$ . oe-init-build-env ../build  
-$ ./../meta-arm/scripts/runfvp --console tmp-fvp/deploy/images/morello-fvp/rootfs-morello-fvp.fvpconf  
-```
-or  
-```
-$ cd poky  
-$ . oe-init-build-env ../build  
-$ ./../meta-arm/scripts/runfvp tmp-fvp/deploy/images/morello-fvp/rootfs-morello-fvp.fvpconf  
-```
-Then inspect the FVP console output for information on your uart_ap port:  
-```
-$ terminal_uart_ap: Listening for serial connection on port 5003  
-```
-With that knowledge you can now run:  
-```
-$ telnet localhost 5003  
-```
-For further instructions on how to run the image with `FVP` go here [4]  
-
-Images
-------
-
-The outputs can be found under build/temp/deploy/images:  
-- board-firmware-sd-image.img goes on the SD card  via DD
-- morello-linux-image..img goes on the USB via DD
-
-Linux and musl-libc
--------------------
-
-The linux kernel and musl-libc are locked in sync so that the release tags from upstream always match.
+This layer contains recipes for compilers (Morello LLVM and GCC) but also the C libraries.
 
 
-Known limitations
------------------
+Contributing
+------------
 
-- the current state of this layer is meant to be just a starting point and foundation for further development, the main aim was to have working `Linux` images ASAP for the community, do not expect elegant `Yocto` solutions yet
+We accept patches through the mailing list only.  
 
-Adding new recipes
-------------------
+https://op-lists.linaro.org/mailman3/lists/linux-morello-distros.op-lists.linaro.org/
+
+Check if the work is not already scheduled in the issues section [2].  
 
 Follow the coding style found in other layers, the aim here is to keep them consistent where possible  
 and very easy to read. Follow the order found in the "headers" of each recipe and in general.  
 
-`.bb` recipes that come from Morello gitlab and are Morello "edits"" of upstream inherit the name Morello in the recipe: package-name-morello  
-`.bbappends` do not need to do this even if they come from Morello gitlab as they would only change `SRC_URI`  
+`.bb` recipes that come from Morello gitlab and are Morello forks of upstream inherit the name Morello in the recipe: package-name-morello  
+`.bbappends` do not need to do this even if they come from Morello gitlab as they would only change `SRC_URI`, which is a bad practice but 
+it is acceptable for now.
 
 Whether to append or start a new recipe at this stage is up to the designer, whatever is the easiest.  
 
-
-Mailing list
-------------
-
-https://op-lists.linaro.org/mailman3/lists/linux-morello-distros.op-lists.linaro.org/
+You should familiarize yourself with the following documents [3][4][5][6].  
 
 References
 ----------
 
 [1] https://kas.readthedocs.io/en/latest/  
-[2] https://developer.arm.com/documentation/den0132/0100/Setting-up-the-Morello-Hardware-Development-Platform  
-[3] https://developer.arm.com/documentation/102278/0001/?lang=en  
-[4] https://github.com/jonmason/meta-arm/blob/master/documentation/runfvp.md  
+[2] https://git.morello-project.org/morello/meta-morello/-/issues  
+[3] https://github.com/ARM-software/abi-aa/blob/main/aaelf64-morello/aaelf64-morello.rst  
+[4] https://git.morello-project.org/morello/kernel/linux/-/wikis/Transitional-Morello-pure-capability-kernel-user-Linux-ABI-specification  
+[5] https://www.openembedded.org/wiki/Commit_Patch_Message_Guidelines  
+[6] https://people.kernel.org/tglx/notes-about-netiquette  
+
+maintainer
+----------
+* Pawel Zalewski <pzalewski@thegoodpenguin.co.uk>
