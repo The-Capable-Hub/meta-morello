@@ -13,6 +13,8 @@ B_COMPILERRT   = "${WORKDIR}/build_compiler_rt"
 S_CRT          = "${LLVM_SHARED_SOURCE}/compiler-rt/lib/crt"
 S_COMPILER_RT  = "${LLVM_SHARED_SOURCE}/compiler-rt"
 
+RDEPENDS:${PN}:remove:toolchain-llvm-morello = " musl"
+
 do_install[depends] += "llvm-morello-native:do_symlink"
 
 FILES:${PN}       += "$(${CC} -print-resource-dir)/lib/${LIB_TRIPLE}"
@@ -34,6 +36,10 @@ BUILD_READELF     = "${LLVM_PATH}/llvm-readelf"
 BUILD_LD          = "${LLVM_PATH}/ld.lld"
 BUILD_LTO         = "-fuse-ld=lld"
 BUILD_HOSTCC      = "${LLVM_PATH}/clang"
+
+CC:remove      = "${CC_PURECAP_FLAGS}"
+CXX:remove     = "${CC_PURECAP_FLAGS}"
+LDFLAGS:remove = "${LD_PURECAP_FLAGS}"
 
 do_install() {
 
