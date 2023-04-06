@@ -45,6 +45,10 @@ export PACKAGES_PATH          = "${S}:${S}/edk2-platforms:${WORKDIR}/edk2-non-os
 export CC_PATH                = "${LLVM_PATH}/clang"
 export LLVM_PATH_35           = "${LLVM_PATH}"
 
+CC:remove      = "${CC_PURECAP_FLAGS}"
+CXX:remove     = "${CC_PURECAP_FLAGS}"
+LDFLAGS:remove = "${LD_PURECAP_FLAGS}"
+
 do_deploy[noexec] = "1"
 
 do_install() {
