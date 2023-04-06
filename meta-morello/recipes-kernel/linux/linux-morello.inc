@@ -13,10 +13,11 @@ FILESEXTRAPATHS:prepend := "${THISDIR}:${THISDIR}/${PN}:"
 DEPENDS                 += "rsync-native"
 PROVIDES                += "virtual/${OUTPUTS_NAME}"
 
-DEPENDS:remove:toolchain-llvm-morello = "virtual/musl-morello"
+DEPENDS:remove:toolchain-llvm-morello        = "virtual/musl-morello"
+RDEPENDS:${PN}:remove:toolchain-llvm-morello = " musl"
 
 SRC_URI = " \
-    git://git.morello-project.org/morello/kernel/linux;protocol=https;nobranch=1 \
+    git://git.morello-project.org/morello/kernel/linux;protocol=https;branch=${SRCBRANCH} \
     "
 
 PV  = "${LINUX_VERSION}+git${SRCPV}"
@@ -41,10 +42,14 @@ KBUILD_DEFCONFIG = "morello_transitional_pcuabi_defconfig"
 do_kernel_configcheck[noexec] = "1"
 do_kernel_configme[depends]  += "llvm-morello-native:do_populate_sysroot"
 
+FILES:${KERNEL_PACKAGE_NAME} += "${PURECAP_SYSROOT_DIR}${prefix}/src/linux-headers-morello/include"
+SYSROOT_DIRS += "${PURECAP_SYSROOT_DIR}${prefix}/src/linux-headers-morello/include"
+
 do_configure:prepend(){
     rm -f ${B}/.config
 }
 
 do_install:append() {
-    oe_runmake headers_install ARCH=arm64 INSTALL_HDR_PATH=${STAGING_KERNEL_BUILDDIR}/kernel-headers
+	install -d ${D}${PURECAP_SYSROOT_DIR}${prefix}/src/linux-headers-morello
+    oe_runmake headers_install ARCH=arm64 INSTALL_HDR_PATH=${D}${PURECAP_SYSROOT_DIR}${prefix}/src/linux-headers-morello
 }
