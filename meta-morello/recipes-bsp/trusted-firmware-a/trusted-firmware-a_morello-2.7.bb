@@ -35,6 +35,10 @@ TFA_DEBUG        = "0"
 
 ARM_TF_ARCH = "aarch64"
 
+CC:remove      = "${CC_PURECAP_FLAGS}"
+CXX:remove     = "${CC_PURECAP_FLAGS}"
+LDFLAGS:remove = "${LD_PURECAP_FLAGS}"
+
 EXTRA_OEMAKE += "\
                 CREATE_KEYS=1 \
                 GENERATE_COT=1 \
