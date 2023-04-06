@@ -4,7 +4,8 @@ LICENSE            = "MIT"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}:"
 
-DEPENDS:remove:toolchain-llvm-morello = "virtual/musl-morello"
+DEPENDS:remove:toolchain-llvm-morello        = "virtual/musl-morello"
+RDEPENDS:${PN}:remove:toolchain-llvm-morello = "musl"
 
 SUMMARY = "CHERI enabled musl libc"
 SRC_URI = " \
@@ -12,8 +13,8 @@ SRC_URI = " \
     file://files/compiler_rt.cmake \
 "
 
-# morello-release-1.5.0
-SRCREV    = "df8f6409fb58efe35a3300b91a1f1941e2f89022"
+# morello-release-1.6.0
+SRCREV    = "3216cb79d3b198e30a13f4b5778a4e235ad58d31"
 SRCBRANCH = "morello/master"
 
 LIC_FILES_CHKSUM  = "file://COPYRIGHT;md5=b03f1cc25363d094011f8f4fd8bcfb68"
@@ -21,11 +22,15 @@ LIC_FILES_CHKSUM  = "file://COPYRIGHT;md5=b03f1cc25363d094011f8f4fd8bcfb68"
 S            = "${WORKDIR}/git"
 B            = "${WORKDIR}/build"
 
-TARGET_INSTALL_DIR = "${D}${MUSL_INSTALL_DIR}"
+TARGET_INSTALL_DIR = "${D}${PURECAP_SYSROOT_DIR}"
 
 INHIBIT_SYSROOT_STRIP       = "1"
 INHIBIT_PACKAGE_STRIP       = "1"
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+
+CC:remove      = "${CC_PURECAP_FLAGS}"
+CXX:remove     = "${CC_PURECAP_FLAGS}"
+LDFLAGS:remove = "${LD_PURECAP_FLAGS}"
 
 CONFIGUREOPTS = " \
     --prefix=${prefix} \
