@@ -16,11 +16,13 @@ SRCREV  = "c86e6a17563423d3938240799196ec68784f9e04"
 SRCBRANCH        = "morello/release-1.5"
 
 LIC_FILES_CHKSUM = "file://LICENSES/bl1.txt;md5=8737ebfecb4a75675c676c10f7d07c70 \
-                    file://LICENSES/mcp_rom.txt;md5=ad686ac8d50ed47c030a1094ffdead49 \
-                    file://LICENSES/scp_rom.txt;md5=f4d01c71878528d6bb100cb606db590c \
+                    file://LICENSES/mcp_romfw.txt;md5=ad686ac8d50ed47c030a1094ffdead49 \
+                    file://LICENSES/scp_romfw.txt;md5=f4d01c71878528d6bb100cb606db590c \
                     "
 
 S = "${WORKDIR}/git"
+
+FILES:${PN} = "bl1.bin scp_romfw.bin mcp_romfw.bin"
 
 do_install () {
     install ${S}/bl1.bin ${D}/bl1.bin

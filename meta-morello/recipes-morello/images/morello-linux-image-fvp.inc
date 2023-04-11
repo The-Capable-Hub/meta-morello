@@ -1,1 +1,0 @@
-TARGET_PLATFORM = "fvp"

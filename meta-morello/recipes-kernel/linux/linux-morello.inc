@@ -35,7 +35,6 @@ ARCH = "arm64"
 LINUX_KERNEL_TYPE     ?= "standard"
 
 KERNEL_FEATURES:append = " ${KERNEL_EXTRA_FEATURES}"
-KERNEL_IMAGETYPE       = "Image"
 
 KBUILD_DEFCONFIG = "morello_transitional_pcuabi_defconfig"
 

@@ -13,4 +13,8 @@ set -e -u
 
 FILES="kas/$(echo $1 | cut -d ':' -f 1).yml"
 
+for i in $(echo $1 | cut -s -d ':' -f 2 | sed 's/[][,]//g'); do
+	FILES+=":ci/$i.yml"
+done
+
 echo $FILES

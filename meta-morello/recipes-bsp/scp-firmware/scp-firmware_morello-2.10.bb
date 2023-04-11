@@ -1,35 +1,76 @@
-inherit cmake
+inherit cmake deploy
+
+SUMMARY     = "SCP and MCP Firmware"
+DESCRIPTION = "Firmware for SCP and MCP software reference implementation"
+HOMEPAGE    = "https://github.com/ARM-software/SCP-firmware"
+
+LICENSE          = "BSD-3-Clause & Apache-2.0"
+LIC_FILES_CHKSUM = "file://license.md;beginline=5;md5=9db9e3d2fb8d9300a6c3d15101b19731 \
+                    file://contrib/cmsis/git/LICENSE.txt;md5=e3fc50a88d0a364313df4b21ef20c29e"
 
 COMPATIBLE_MACHINE = "morello"
 OUTPUTS_NAME       = "scp-firmware"
 SECTION            = "firmware"
+
+PACKAGE_ARCH       = "${MACHINE_ARCH}"
+
+TOOLCHAIN          = "gcc"
 
 MACHINE_SCP_REQUIRE ?= ""
 MACHINE_SCP_REQUIRE:morello-fvp = "scp-firmware-morello-fvp.inc"
 MACHINE_SCP_REQUIRE:morello-soc = "scp-firmware-morello-soc.inc"
 require ${MACHINE_SCP_REQUIRE}
 
-DEPENDS           += "virtual/board-firmware"
+INHIBIT_DEFAULT_DEPS = "1"
 
+DEPENDS           += "virtual/arm-none-eabi-gcc-native virtual/board-firmware"
 PROVIDES          += "virtual/${OUTPUTS_NAME}"
 
 SRC_URI            = "gitsm://git.morello-project.org/morello/scp-firmware.git;protocol=https;branch=${SRCBRANCH}"
 SRCREV             = "758aad2f0c522d2dd7b8f84eca5d9d71fa2d9359"
-PV                 = "2.10.0+git${SRCPV}"
+PV                 = "morello-2.10.0+git${SRCPV}"
 
 SRCBRANCH          = "morello/master"
 
-SCP_PLATFORM  = "morello"
-SCP_LOG_LEVEL = "INFO"
+SCP_BUILD_RELEASE ?= "1"
+SCP_COMPILER      ?= "arm-none-eabi"
+SCP_PLATFORM      ?= "morello"
+SCP_LOG_LEVEL     ?= "INFO"
 
 SENSOR        = "${RECIPE_SYSROOT}/board-firmware/LIB/sensor.a"
 B             = "${WORKDIR}/build/morello"
+S             = "${WORKDIR}/git"
 
-FW_TARGETS    = "scp mcp"
+# Allow platform specific copying of only scp or both scp & mcp, default to both
+FW_TARGETS ?= "scp mcp"
+FW_INSTALL ?= "ramfw romfw"
 
-unset do_configure[noexec]
-unset do_compile[cleandirs]
+
+LDFLAGS[unexport] = "1"
+
+
+EXTRA_OEMAKE = "V=1 \
+                BUILD_PATH='${B}' \
+                PRODUCT='${SCP_PLATFORM}' \
+                MODE='${SCP_BUILD_STR}' \
+                LOG_LEVEL='${SCP_LOG_LEVEL}' \
+                CC='${SCP_COMPILER}-gcc' \
+                AR='${SCP_COMPILER}-ar' \
+                SIZE='${SCP_COMPILER}-size' \
+                OBJCOPY='${SCP_COMPILER}-objcopy' \
+                "
+
 do_configure[depends]  += "board-firmware:do_install"
+
+FILES:${PN}   = "/firmware"
+SYSROOT_DIRS += "/firmware"
+
+FILES:${PN}-dbg      += "/firmware/*.elf"
+
+# Skip QA check for relocations in .text of elf binaries
+INSANE_SKIP:${PN}-dbg       = "arch textrel"
+INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+INHIBIT_PACKAGE_STRIP       = "1"
 
 do_configure() {
 
@@ -77,3 +118,9 @@ do_install() {
         done
     done
 }
+
+do_deploy() {
+    # Copy the images to deploy directory
+    cp -rf ${D}/firmware/* ${DEPLOYDIR}/
+}
+addtask deploy after do_install

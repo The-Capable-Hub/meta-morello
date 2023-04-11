@@ -1,5 +1,5 @@
 
-
+require recipes-bsp/trusted-firmware-a/trusted-firmware-a.inc
 COMPATIBLE_MACHINE = "morello"
 SUMMARY            = "TF-A to be compiled with LLVM Morello"
 OUTPUTS_NAME       = "trusted-firmware-a"
@@ -17,7 +17,6 @@ PROVIDES   += "virtual/${OUTPUTS_NAME}"
 
 SRC_URI     = "gitsm://git.morello-project.org/morello/trusted-firmware-a;protocol=https;name=tfa;branch=${SRCBRANCH}"
 SRCREV_tfa  = "3ce2815936774fe924ec7538151b71085c2f18d9"
-PV          = "2.7+git${SRCPV}"
 
 SRCBRANCH        = "morello/master"
 LIC_FILES_CHKSUM = "file://docs/license.rst;md5=b2c740efedc159745b9b31f88ff03dde"

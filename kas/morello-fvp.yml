@@ -5,25 +5,12 @@ header:
 machine: morello-fvp
 
 local_conf_header:
-    testimage-config: |
+    fvp-config: |
 
         LICENSE_FLAGS_ACCEPTED:append = " Arm-FVP-EULA"
 
-        TESTIMAGE_AUTO = "1"
-
-        TEST_TARGET_IP ?= "127.0.0.1:8022"
-        TEST_SERVER_IP ?= "127.0.1.1"
-
-        PACKAGECONFIG:remove:pn-openssh = "rng-tools"
-        CORE_IMAGE_EXTRA_INSTALL:append = " ssh-pregen-hostkeys"
-        IMAGE_FEATURES:append           = " ssh-server-dropbear"
-
-        IMAGE_CLASSES:append = " testimage"
         INHERIT             += "fvpboot"
-
-        TEST_TARGET = "OEFVPSerialTarget"
-        TEST_SUITES = "linuxboot"
 
         FVP_CONSOLES[default] = "terminal_uart_ap"
 target:
-  - morello-linux-image
+  - core-image-minimal

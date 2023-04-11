@@ -2,7 +2,7 @@ COMPATIBLE_MACHINE = "morello"
 SUMMARY            = "Board firmware for Morello"
 DESCRIPTION        = "The SD card image from ARM that contains non compile-able binaries."
 HOMEPAGE           = "https://git.morello-project.org/morello/board-firmware"
-LICENSE            = "STMicroelectronics & BSD-3-Clause & BSD-2-Clause"
+LICENSE            = "STM-SLA0044-Rev5 & BSD-3-Clause & BSD-2-Clause"
 OUTPUTS_NAME       = "board-firmware"
 SECTION            = "firmware"
 

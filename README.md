@@ -28,13 +28,10 @@ Check if the work is not already scheduled in the issues section [2].
 Follow the coding style found in other layers, the aim here is to keep them consistent where possible  
 and very easy to read. Follow the order found in the "headers" of each recipe and in general.  
 
-`.bb` recipes that come from Morello gitlab and are Morello forks of upstream inherit the name Morello in the recipe: package-name-morello  
-`.bbappends` do not need to do this even if they come from Morello gitlab as they would only change `SRC_URI`, which is a bad practice but 
-it is acceptable for now.
-
-Whether to append or start a new recipe at this stage is up to the designer, whatever is the easiest.  
+`.bb` recipes that come from Morello gitlab and are Morello forks of upstream inherit the name Morello in the recipe: package-name_morello-version  
 
 You should familiarize yourself with the following documents [3][4][5][6].  
+
 
 References
 ----------
