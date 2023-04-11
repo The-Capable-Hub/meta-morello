@@ -7,8 +7,8 @@ DEPENDS += "openssl-native"
 PROVIDES = "virtual/fiptool-native"
 
 SRC_URI    = "gitsm://git.morello-project.org/morello/trusted-firmware-a;protocol=https;branch=${SRCBRANCH}"
-SRCBRANCH  = "morello/master"
-SRCREV     = "3ce2815936774fe924ec7538151b71085c2f18d9"
+SRCBRANCH  = "morello/release-1.6"
+SRCREV     = "67b92446415f3532445b8a851e5adc18d0d1bf0f"
 
 LIC_FILES_CHKSUM = "file://docs/license.rst;md5=b2c740efedc159745b9b31f88ff03dde"
 
