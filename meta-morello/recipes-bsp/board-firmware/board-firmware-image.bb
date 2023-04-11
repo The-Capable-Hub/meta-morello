@@ -30,6 +30,7 @@ FIP_OPTIONS   = "\
                 --soc-fw '${FIRMWARE_PATH}/bl31.bin' \
                 --nt-fw '${FIRMWARE_PATH}/uefi.bin' \
                 --fw-config '${FIRMWARE_PATH}/morello_fw_config.dtb' \
+				--hw-config '${FIRMWARE_PATH}/morello-${TARGET_PLATFORM}.dtb' \
                 --tb-fw-config '${FIRMWARE_PATH}/morello_tb_fw_config.dtb' \
                 --nt-fw-config '${FIRMWARE_PATH}/morello_nt_fw_config.dtb' \
                 --trusted-key-cert '${FIRMWARE_PATH}/tfa_certs/trusted_key.crt' \
