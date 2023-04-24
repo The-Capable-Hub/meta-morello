@@ -2,9 +2,10 @@ require linux-morello.inc
 
 LIC_FILES_CHKSUM  = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 
-SRCREV = "87d06928f90fe910311210a0149d03f3420f593c"
+SRCREV    = "c4b74f2e4712d38f2ea9d5b924f52e38c6faa446"
+SRCBRANCH = "morello/master"
 
-LINUX_VERSION          = "5.18"
+LINUX_VERSION          = "6.1"
 LINUX_VERSION_EXTENSION= "-yocto-purecap"
 
 COMPATIBLE_MACHINE = "morello"

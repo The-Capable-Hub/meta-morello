@@ -24,12 +24,12 @@ SRC_URI = "\
     file://files/0001-Basetools-remove-brotli-build-errors.patch \
     "
 
-EDK2_SRC_URI           = "gitsm://git.morello-project.org/morello/edk2;branch=morello/master;protocol=https"
-EDK2_PLATFORMS_SRC_URI = "gitsm://git.morello-project.org/morello/edk2-platforms;branch=morello/master;protocol=https"
+EDK2_SRC_URI           = "gitsm://git.morello-project.org/morello/edk2;branch=morello/release-1.6;protocol=https"
+EDK2_PLATFORMS_SRC_URI = "gitsm://git.morello-project.org/morello/edk2-platforms;branch=morello/release-1.6;protocol=https"
 EDK2_NON_OSI_SRC_URI   = "git://github.com/tianocore/edk2-non-osi;branch=master;protocol=https"
 SRCREV_edk2-non-osi    = "0320db977fb27e63424b0953a3020bb81c89e8f0"
 SRCREV_edk2            = "ce510c33dfc354e262ccd71619add069876d6a08"
-SRCREV_edk2-platforms  = "6bae2381d664e668875720e7eb86f751cb1de373"
+SRCREV_edk2-platforms  = "a5e30111ce700fbd71415bc3b22bbe2561fe5c58"
 
 EDK2_BUILD_RELEASE = "0"
 
@@ -44,6 +44,10 @@ export CLANG35_AARCH64_PREFIX = "${LLVM_PATH}/llvm-"
 export PACKAGES_PATH          = "${S}:${S}/edk2-platforms:${WORKDIR}/edk2-non-osi"
 export CC_PATH                = "${LLVM_PATH}/clang"
 export LLVM_PATH_35           = "${LLVM_PATH}"
+
+CC:remove      = "${CC_PURECAP_FLAGS}"
+CXX:remove     = "${CC_PURECAP_FLAGS}"
+LDFLAGS:remove = "${LD_PURECAP_FLAGS}"
 
 do_deploy[noexec] = "1"
 

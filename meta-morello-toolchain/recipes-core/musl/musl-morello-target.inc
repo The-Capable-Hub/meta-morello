@@ -6,23 +6,24 @@ TOOLCHAIN          = "${MORELLO_TOOLCHAIN}"
 
 MUSL_LDSO_ARCH = "aarch64_purecap"
 
-FILES:${PN}  = "${MUSL_INSTALL_DIR}"
-FILES:${PN} += "${MUSL_INSTALL_DIR}${datadir} ${MUSL_INSTALL_DIR}${bindir} ${MUSL_INSTALL_DIR}${libdir}"
-FILES:${PN} += "${MUSL_INSTALL_DIR}${includedir} ${MUSL_INSTALL_DIR}${includedir}/sys \
-                 ${MUSL_INSTALL_DIR}${includedir}/arpa ${MUSL_INSTALL_DIR}${includedir}/bits \
-                 ${MUSL_INSTALL_DIR}${includedir}/net ${MUSL_INSTALL_DIR}${includedir}/netinet \
-                 ${MUSL_INSTALL_DIR}${includedir}/netpacket ${MUSL_INSTALL_DIR}${includedir}/arpa \
-                 ${MUSL_INSTALL_DIR}${includedir}/scsi ${MUSL_INSTALL_DIR}${includedir}/sys"
+FILES:${PN}  = "${PURECAP_SYSROOT_DIR}"
+
+FILES:${PN} += "${PURECAP_SYSROOT_DIR}${datadir} ${PURECAP_SYSROOT_DIR}${bindir} ${PURECAP_SYSROOT_DIR}${libdir}"
+FILES:${PN} += "${PURECAP_SYSROOT_DIR}${includedir} ${PURECAP_SYSROOT_DIR}${includedir}/sys \
+                 ${PURECAP_SYSROOT_DIR}${includedir}/arpa ${PURECAP_SYSROOT_DIR}${includedir}/bits \
+                 ${PURECAP_SYSROOT_DIR}${includedir}/net ${PURECAP_SYSROOT_DIR}${includedir}/netinet \
+                 ${PURECAP_SYSROOT_DIR}${includedir}/netpacket ${PURECAP_SYSROOT_DIR}${includedir}/arpa \
+                 ${PURECAP_SYSROOT_DIR}${includedir}/scsi ${PURECAP_SYSROOT_DIR}${includedir}/sys"
 
 FILES:${PN} += "${nonarch_base_libdir}/ld-musl-${MUSL_LDSO_ARCH}.so.1 ${sysconfdir}/ld-musl-${MUSL_LDSO_ARCH}.path"
 
-FILES:${PN}-staticdev = "${MUSL_INSTALL_DIR}${libdir}/libc.a"
-FILES:${PN}-dev =+ "${MUSL_INSTALL_DIR}${libdir}/libcrypt.a ${MUSL_INSTALL_DIR}${libdir}/libdl.a ${MUSL_INSTALL_DIR}${libdir}/libm.a \
-                    ${MUSL_INSTALL_DIR}${libdir}/libpthread.a ${MUSL_INSTALL_DIR}${libdir}/libresolv.a \
-                    ${MUSL_INSTALL_DIR}${libdir}/librt.a ${MUSL_INSTALL_DIR}${libdir}/libutil.a ${MUSL_INSTALL_DIR}${libdir}/libxnet.a \
+FILES:${PN}-staticdev = "${PURECAP_SYSROOT_DIR}${libdir}/libc.a"
+FILES:${PN}-dev =+ "${PURECAP_SYSROOT_DIR}${libdir}/libcrypt.a ${PURECAP_SYSROOT_DIR}${libdir}/libdl.a ${PURECAP_SYSROOT_DIR}${libdir}/libm.a \
+                    ${PURECAP_SYSROOT_DIR}${libdir}/libpthread.a ${PURECAP_SYSROOT_DIR}${libdir}/libresolv.a \
+                    ${PURECAP_SYSROOT_DIR}${libdir}/librt.a ${PURECAP_SYSROOT_DIR}${libdir}/libutil.a ${PURECAP_SYSROOT_DIR}${libdir}/libxnet.a \
                    "
 
-SYSROOT_DIRS += "${sysconfdir} ${MUSL_INSTALL_DIR}${includedir}"
+SYSROOT_DIRS += "${sysconfdir} ${PURECAP_SYSROOT_DIR}${includedir}"
 
 do_install() {
 

@@ -16,9 +16,9 @@ require ${MACHINE_TFA_REQUIRE}
 PROVIDES   += "virtual/${OUTPUTS_NAME}"
 
 SRC_URI     = "gitsm://git.morello-project.org/morello/trusted-firmware-a;protocol=https;name=tfa;branch=${SRCBRANCH}"
-SRCREV_tfa  = "3ce2815936774fe924ec7538151b71085c2f18d9"
+SRCREV_tfa  = "67b92446415f3532445b8a851e5adc18d0d1bf0f"
 
-SRCBRANCH        = "morello/master"
+SRCBRANCH        = "morello/release-1.6"
 LIC_FILES_CHKSUM = "file://docs/license.rst;md5=b2c740efedc159745b9b31f88ff03dde"
 
 TFA_MBEDTLS              = "1"
@@ -34,6 +34,10 @@ TFA_BUILD_TARGET = "bl1 bl2 bl31 dtbs"
 TFA_DEBUG        = "0"
 
 ARM_TF_ARCH = "aarch64"
+
+CC:remove      = "${CC_PURECAP_FLAGS}"
+CXX:remove     = "${CC_PURECAP_FLAGS}"
+LDFLAGS:remove = "${LD_PURECAP_FLAGS}"
 
 EXTRA_OEMAKE += "\
                 CREATE_KEYS=1 \

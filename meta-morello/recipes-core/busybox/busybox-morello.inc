@@ -1,4 +1,4 @@
-
+inherit pure-cap-kheaders
 
 COMPATIBLE_MACHINE = "morello"
 SUMMARY            = "CHERI enabled busybox"
@@ -9,7 +9,6 @@ TOOLCHAIN          = "${MORELLO_TOOLCHAIN}"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}:${THISDIR}/${PN}:"
 
-DEPENDS  += "virtual/kernel virtual/musl-morello"
 PROVIDES += "virtual/morello-busybox"
 
 RPROVIDES:${PN} += "busybox-morello"
@@ -22,14 +21,12 @@ SRC_URI = " \
 PV  = "git${SRCPV}"
 S   = "${WORKDIR}/git"
 
-do_compile[depends] = "virtual/kernel:do_install"
-
 EXTRA_OEMAKE = "\
-                MUSL_HOME='${STAGING_DIR_TARGET}${MUSL_INSTALL_DIR}${prefix}' \
-                KHEADERS='${STAGING_KERNEL_BUILDDIR}/kernel-headers/include/' \
+                MUSL_HOME='${STAGING_DIR_TARGET}${PURECAP_SYSROOT_DIR}${prefix}' \
+                KHEADERS='${STAGING_DIR_TARGET}${PURECAP_SYSROOT_DIR}${prefix}/src/linux-headers-morello/include' \
             "
 
-FILES:${PN}  += "/busybox-morello/busybox"
+FILES:${PN}  += "/busybox-morello/busybox ${PURECAP_SYSROOT_DIR}/bin"
 SYSROOT_DIRS += "/busybox-morello"
 
 INHIBIT_SYSROOT_STRIP       = "1"
@@ -49,6 +46,7 @@ do_compile() {
 }
 
 do_install() {
-    install -d ${D}/busybox-morello
+    install -d ${D}/busybox-morello ${D}${PURECAP_SYSROOT_DIR}/bin
     install -m 0755  ${S}/busybox ${D}/busybox-morello/busybox
+    install -m 0755  ${S}/busybox ${D}${PURECAP_SYSROOT_DIR}/bin
 }

@@ -10,7 +10,6 @@ LIC_FILES_CHKSUM   = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ec
 TOOLCHAIN          = "${MORELLO_TOOLCHAIN}"
 
 PROVIDES           = "${OUTPUTS_NAME}"
-RDEPENDS:${PN}    += "musl"
 RPROVIDES:${PN}   += "${OUTPUTS_NAME}"
 
 FILES:${PN} += "/${APP_DIR}"
