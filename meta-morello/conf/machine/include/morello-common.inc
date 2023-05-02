@@ -2,7 +2,7 @@ require ${COREBASE}/meta/conf/machine/include/arm/armv8-2a/tune-neoversen1.inc
 
 MACHINEOVERRIDES =. "morello"
 
-PREFERRED_VERSION_board-firmware     = "morello-1.4"
+PREFERRED_VERSION_board-firmware     = "morello-1.6"
 PREFERRED_VERSION_edk2-firmware      = "morello-2.4"
 PREFERRED_VERSION_scp-firmware       = "morello-2.1%"
 
