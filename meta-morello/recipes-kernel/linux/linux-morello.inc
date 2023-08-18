@@ -17,7 +17,7 @@ DEPENDS:remove:toolchain-llvm-morello        = "virtual/musl-morello"
 RDEPENDS:${PN}:remove:toolchain-llvm-morello = " musl"
 
 SRC_URI = " \
-    git://git.morello-project.org/morello/kernel/linux;protocol=https;branch=${SRCBRANCH} \
+    git://git.morello-project.org/morello/kernel/linux;protocol=https;nobranch=1  \
     "
 
 PV  = "${LINUX_VERSION}+git${SRCPV}"

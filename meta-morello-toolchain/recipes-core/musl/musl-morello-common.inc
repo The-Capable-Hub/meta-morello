@@ -11,10 +11,10 @@ SUMMARY = "CHERI enabled musl libc"
 SRC_URI = " \
     git://git.morello-project.org/morello/musl-libc;protocol=https;branch=${SRCBRANCH} \
     file://files/compiler_rt.cmake \
-"
+	"
 
-# morello-release-1.6.0
-SRCREV    = "3216cb79d3b198e30a13f4b5778a4e235ad58d31"
+# morello-release-1.6.1
+SRCREV    = "b82b5af221072d68e18fad82bae6d2ab308e3985"
 SRCBRANCH = "morello/master"
 
 LIC_FILES_CHKSUM  = "file://COPYRIGHT;md5=b03f1cc25363d094011f8f4fd8bcfb68"
