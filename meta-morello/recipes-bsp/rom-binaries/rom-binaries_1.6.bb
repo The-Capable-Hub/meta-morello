@@ -13,7 +13,7 @@ PACKAGE_ARCH       = "${MACHINE_ARCH}"
 SRC_URI = "git://git.morello-project.org/morello/rom-binaries;protocol=https;branch=${SRCBRANCH}"
 SRCREV  = "c86e6a17563423d3938240799196ec68784f9e04"
 
-SRCBRANCH        = "morello/release-1.5"
+SRCBRANCH        = "morello/release-1.6"
 
 LIC_FILES_CHKSUM = "file://LICENSES/bl1.txt;md5=8737ebfecb4a75675c676c10f7d07c70 \
                     file://LICENSES/mcp_romfw.txt;md5=ad686ac8d50ed47c030a1094ffdead49 \
