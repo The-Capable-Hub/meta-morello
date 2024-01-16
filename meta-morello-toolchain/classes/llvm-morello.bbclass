@@ -8,6 +8,9 @@ LLVM_CONFIG  ??= ""
 LIBCPLUSPLUS ??= ""
 TC_DEPENDS   ??= ""
 
+# /usr/lib /usr/bin etc. are used here explicitly in case this class
+# would be combined with other classes that could overwrite these variables
+
 LLVM_VERSION:toolchain-llvm-morello     = "13.0.0"
 LLVM_PATH:toolchain-llvm-morello        = "${STAGING_DIR_NATIVE}/usr/bin"
 
@@ -50,12 +53,13 @@ CC_PURECAP_FLAGS += "\
            -Werror=cheri-bitwise-operations \
            "
 
-CC_PURECAP_FLAGS += "-isystem ${STAGING_DIR_TARGET}${PURECAP_SYSROOT_DIR}${prefix}/src/linux-headers-morello/include"
+CC_PURECAP_FLAGS += "-isystem ${STAGING_DIR_TARGET}${PURECAP_SYSROOT_DIR}/usr/src/linux-headers-morello/include"
 
 CC:append:toolchain-llvm-morello:class-target      = " ${CC_PURECAP_FLAGS}"
 CXX:append:toolchain-llvm-morello:class-target     = " ${CC_PURECAP_FLAGS}"
 
-LD_PURECAP_FLAGS = "-L${STAGING_DIR_TARGET}${PURECAP_SYSROOT_DIR}${libdir} -rtlib=compiler-rt"
+LD_PURECAP_FLAGS = "-L${STAGING_DIR_TARGET}${PURECAP_SYSROOT_DIR}/usr/lib -rtlib=compiler-rt -Wl,-rpath=${PURECAP_SYSROOT_DIR}/usr/lib "
+
 LDFLAGS:append:toolchain-llvm-morello:class-target = " ${LD_PURECAP_FLAGS}"
 
 DEPENDS:remove:toolchain-llvm-morello = "libgcc"
