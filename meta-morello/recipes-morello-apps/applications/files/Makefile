@@ -2,7 +2,7 @@ NAME=$(OUTPUTS_NAME)
 CC=$(LLVM_PATH)/clang
 
 TARGET=aarch64-linux-musl_purecap
-ARCH=-march=morello+c64 -mabi=purecap
+ARCH=-march=morello -mabi=purecap
 CLANG_RESOURCE_DIR=$(shell ${CC} -print-resource-dir)
 CLANG_LIB=$(CLANG_RESOURCE_DIR)/lib/aarch64-unknown-linux-musl_purecap
 COMPILER_INC=$(CLANG_RESOURCE_DIR)/include

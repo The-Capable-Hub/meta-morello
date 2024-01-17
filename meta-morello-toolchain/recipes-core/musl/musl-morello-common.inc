@@ -13,8 +13,8 @@ SRC_URI = " \
     file://files/compiler_rt.cmake \
 	"
 
-# morello-release-1.6.1
-SRCREV    = "b82b5af221072d68e18fad82bae6d2ab308e3985"
+# morello-release-1.7
+SRCREV    = "f712fa4d03821e9fba9c3e3afd9fb570efdecedd"
 SRCBRANCH = "morello/master"
 
 LIC_FILES_CHKSUM  = "file://COPYRIGHT;md5=b03f1cc25363d094011f8f4fd8bcfb68"
@@ -64,7 +64,7 @@ do_configure() {
     local config="${CONFIGUREOPTS}"
     echo "Install dir ${TARGET_INSTALL_DIR} with ${TCLIBC} MACHINE_INC ${MACHINE_INC}"
     config="${config} --target=${ARCH_TRIPLE} ${EXTRA_CONFIGUREOPTS} --disable-shared"
-	${S}/configure ${config}
+    ${S}/configure ${config}
 }
 
 do_compile() {

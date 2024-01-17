@@ -27,10 +27,10 @@ DEPENDS           += "virtual/arm-none-eabi-gcc-native virtual/board-firmware"
 PROVIDES          += "virtual/${OUTPUTS_NAME}"
 
 SRC_URI            = "gitsm://git.morello-project.org/morello/scp-firmware.git;protocol=https;branch=${SRCBRANCH}"
-SRCREV             = "6a5a79a4e51178483530f7161b1583a75029635e"
-PV                 = "morello-2.10.0+git${SRCPV}"
+SRCREV             = "2713e710f25f6a0fa244cee2fde1d7fdcd78d8ab"
+PV                 = "morello-2.12.0+git${SRCPV}"
 
-SRCBRANCH          = "morello/release-1.6"
+SRCBRANCH          = "morello/release-1.7"
 
 SCP_BUILD_RELEASE ?= "1"
 SCP_COMPILER      ?= "arm-none-eabi"

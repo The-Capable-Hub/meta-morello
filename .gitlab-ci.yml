@@ -31,6 +31,7 @@ stages:
     - rm -rf $KAS_WORK_DIR
     - mkdir --verbose --parents $KAS_WORK_DIR $KAS_REPO_REF_DIR $SSTATE_DIR $DL_DIR
     - sudo apt-get update && sudo apt install -y libtinfo5
+    - sudo apt install -y libc++-13-dev libc++abi-13-dev
 
 # Generalised fragment to do a Kas build
 .build:
@@ -46,7 +47,7 @@ stages:
     name: "logs"
     when: on_failure
     paths:
-      - $CI_PROJECT_DIR/work/build/tmp/work*/**/temp/log.do_*.*
+      - $CI_PROJECT_DIR/work/build/tmp*/work*/**/temp/log.do_*.*
 
 #
 # Prep stage, update repositories once

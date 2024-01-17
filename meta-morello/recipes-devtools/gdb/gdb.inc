@@ -17,4 +17,4 @@ SRC_URI   = "git://git.morello-project.org/morello/binutils-gdb.git;protocol=htt
             "
 
 SRCBRANCH = "users/ARM/morello-binutils-gdb-master"
-SRCREV    = "690199d5d4180f287074f2976a12d2df1e415d67"
+SRCREV    = "70d0d9f04a51b8c441334f42cd5dfb1f9215be53"
