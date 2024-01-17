@@ -15,7 +15,7 @@ index f9d916f98..4c95c8d56 100644
 @@ -142,10 +142,9 @@ VPATH		:= $(srctree)$(if $(KBUILD_EXTMOD),:$(KBUILD_EXTMOD))
  # Morello Settings
  MORELLO_TARGET		:= aarch64-linux-musl_purecap
- MORELLO_FLAGS		:= -Wno-cheri-inefficient -march=morello+c64
+ MORELLO_FLAGS		:= -Wno-cheri-inefficient -march=morello -mabi=purecap
 -ELF_PATCH		:= morello_elf
  MUSL_HOME		:= ../../musl-bin
  KHEADERS		:= ../morello-linux-headers/usr/include/

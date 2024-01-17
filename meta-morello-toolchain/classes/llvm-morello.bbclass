@@ -11,7 +11,8 @@ TC_DEPENDS   ??= ""
 LLVM_VERSION:toolchain-llvm-morello     = "13.0.0"
 LLVM_PATH:toolchain-llvm-morello        = "${STAGING_DIR_NATIVE}/usr/bin"
 
-INHIBIT_DEFAULT_DEPS:toolchain-llvm-morello = "1"
+INHIBIT_DEFAULT_DEPS:toolchain-llvm-morello  = "1"
+INHIBIT_PACKAGE_STRIP:toolchain-llvm-morello = "1"
 
 TC_DEPENDS:append:toolchain-llvm-morello              = " virtual/llvm-morello-native"
 TC_DEPENDS:append:toolchain-llvm-morello:class-target = " virtual/llvm-morello-runtime-native virtual/musl-morello"
@@ -38,14 +39,16 @@ LLVM_CONFIG:toolchain-llvm-morello ??= "${LLVM_PATH}/llvm-config"
 
 export ${LLVM_CONFIG}
 
-CC_PURECAP_FLAGS = "--target=${GLOBAL_ARCH_TRIPLE} --sysroot ${STAGING_DIR_TARGET}${PURECAP_SYSROOT_DIR} -march=morello+c64"
+CC_PURECAP_FLAGS = "--target=${GLOBAL_ARCH_TRIPLE} --sysroot ${STAGING_DIR_TARGET}${PURECAP_SYSROOT_DIR} -march=morello -mabi=purecap"
 
-CC_PURECAP_FLAGS += "-Werror=implicit-function-declaration \
-					 -Werror=format \
-					 -Werror=undefined-internal \
-					 -Werror=incompatible-pointer-types \
-					 -Werror=cheri-capability-misuse \
-					 "
+CC_PURECAP_FLAGS += "\
+           -Werror=implicit-function-declaration \
+           -Werror=format \
+           -Werror=undefined-internal \
+           -Werror=incompatible-pointer-types \
+           -Werror=cheri-capability-misuse \
+           -Werror=cheri-bitwise-operations \
+           "
 
 CC_PURECAP_FLAGS += "-isystem ${STAGING_DIR_TARGET}${PURECAP_SYSROOT_DIR}${prefix}/src/linux-headers-morello/include"
 

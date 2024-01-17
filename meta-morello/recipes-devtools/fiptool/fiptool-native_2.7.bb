@@ -7,14 +7,18 @@ DEPENDS += "openssl-native"
 PROVIDES = "virtual/fiptool-native"
 
 SRC_URI    = "gitsm://git.morello-project.org/morello/trusted-firmware-a;protocol=https;branch=${SRCBRANCH}"
-SRCBRANCH  = "morello/release-1.6"
-SRCREV     = "67b92446415f3532445b8a851e5adc18d0d1bf0f"
+SRCBRANCH  = "morello/release-1.7"
+SRCREV     = "d8fb838b2fec40f5d3c4f76be26abaef1752ae90"
 
 LIC_FILES_CHKSUM = "file://docs/license.rst;md5=b2c740efedc159745b9b31f88ff03dde"
 
 EXTRA_OEMAKE = "HOSTCC='${BUILD_CC}' OPENSSL_DIR=${STAGING_DIR_NATIVE}${prefix_native}"
 
 S = "${WORKDIR}/git"
+
+EXTRA_OEMAKE += "\
+                ENABLE_MORELLO_CAP=0 \
+                "
 
 do_compile() {
     sed -i '/^LDLIBS/ s,$, \$\{BUILD_LDFLAGS},' ${S}/tools/fiptool/Makefile
