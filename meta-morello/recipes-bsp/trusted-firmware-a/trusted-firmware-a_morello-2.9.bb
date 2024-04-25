@@ -16,9 +16,9 @@ require ${MACHINE_TFA_REQUIRE}
 PROVIDES   += "virtual/${OUTPUTS_NAME}"
 
 SRC_URI     = "gitsm://git.morello-project.org/morello/trusted-firmware-a;protocol=https;name=tfa;branch=${SRCBRANCH}"
-SRCREV_tfa  = "d8fb838b2fec40f5d3c4f76be26abaef1752ae90"
+SRCREV_tfa  = "02f8715927a8906a473a43befe82b93bfdd73d9e"
 
-SRCBRANCH        = "morello/release-1.7"
+SRCBRANCH        = "morello/release-1.8"
 LIC_FILES_CHKSUM = "file://docs/license.rst;md5=b2c740efedc159745b9b31f88ff03dde"
 
 TFA_MBEDTLS              = "1"
