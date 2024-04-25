@@ -8,9 +8,9 @@ OUTPUTS_NAME = "llvm-morello"
 DEPENDS      = "zlib-native ninja-native ${COMPILER}-native"
 
 SRC_URI = "git://git.morello-project.org/morello/llvm-project;protocol=https;branch=${SRCBRANCH}"
-SRCREV  = "45b95b9c3afe4c049e73c499bfe4708372171fa0"
+SRCREV  = "ae1b1aad04c1c579db8c09d1049dc0553821fbc2"
 
-SRCBRANCH        = "morello/release-1.7"
+SRCBRANCH        = "morello/release-1.8"
 LIC_FILES_CHKSUM = "file://LICENSE.TXT;md5=8a15a0759ef07f2682d2ba4b893c9afe"
 
 S             = "${WORKDIR}/git/llvm"
