@@ -11,9 +11,9 @@ PROVIDES          += "virtual/${OUTPUTS_NAME}"
 PACKAGE_ARCH       = "${MACHINE_ARCH}"
 
 SRC_URI = "git://git.morello-project.org/morello/board-firmware;protocol=https;branch=${SRCBRANCH}"
-SRCREV  = "11cc76c9fad2e81c5529ecd4d09496070b92218f"
+SRCREV  = "3f0701022efbbd5d245b439688e5d8408fd9dc5a"
 
-SRCBRANCH        = "morello/release-1.7"
+SRCBRANCH        = "morello/release-1.8"
 LIC_FILES_CHKSUM = "file://LICENSES/MB/STM.TXT;md5=47185091e44d729bf62ed5c99d7eb9d9 \
                     file://LICENSES/LIB/sensor.txt;md5=9326703f1725982ef3a268f53ccd1883 \
                     "
