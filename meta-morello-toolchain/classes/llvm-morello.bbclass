@@ -11,7 +11,7 @@ TC_DEPENDS   ??= ""
 # /usr/lib /usr/bin etc. are used here explicitly in case this class
 # would be combined with other classes that could overwrite these variables
 
-LLVM_VERSION:toolchain-llvm-morello     = "13.0.0"
+LLVM_VERSION:toolchain-llvm-morello     = "14.0.0"
 LLVM_PATH:toolchain-llvm-morello        = "${STAGING_DIR_NATIVE}/usr/bin"
 
 INHIBIT_DEFAULT_DEPS:toolchain-llvm-morello  = "1"
