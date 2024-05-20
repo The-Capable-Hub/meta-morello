@@ -14,7 +14,7 @@ SRC_URI = " \
 	"
 
 # morello-release-1.7
-SRCREV    = "f712fa4d03821e9fba9c3e3afd9fb570efdecedd"
+SRCREV    = "acfb827ad04d98ec5c0f558932e29b3c76de3093"
 SRCBRANCH = "morello/master"
 
 LIC_FILES_CHKSUM  = "file://COPYRIGHT;md5=b03f1cc25363d094011f8f4fd8bcfb68"
