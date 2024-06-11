@@ -18,6 +18,7 @@ RDEPENDS:${PN}:remove:toolchain-llvm-morello = " musl"
 
 SRC_URI = " \
     git://git.morello-project.org/morello/kernel/linux;protocol=https;nobranch=1  \
+    file://netfilter.cfg \
     "
 
 PV  = "${LINUX_VERSION}+git${SRCPV}"
@@ -39,15 +40,13 @@ KERNEL_FEATURES:append = " ${KERNEL_EXTRA_FEATURES}"
 
 KBUILD_DEFCONFIG = "morello_transitional_pcuabi_defconfig"
 
+KCONFIG_MODE = "--alldefconfig"
+
 do_kernel_configcheck[noexec] = "1"
 do_kernel_configme[depends]  += "llvm-morello-native:do_populate_sysroot"
 
 FILES:${KERNEL_PACKAGE_NAME} += "${PURECAP_SYSROOT_DIR}${prefix}/src/linux-headers-morello/include"
 SYSROOT_DIRS += "${PURECAP_SYSROOT_DIR}${prefix}/src/linux-headers-morello/include"
-
-do_configure:prepend(){
-    rm -f ${B}/.config
-}
 
 do_install:append() {
 	install -d ${D}${PURECAP_SYSROOT_DIR}${prefix}/src/linux-headers-morello

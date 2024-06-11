@@ -45,6 +45,8 @@ do_install() {
 
     export CFLAGS=""
 
+    local llvmversion=$(${CC} --version)
+
     local resourcedir=$(${CC} -print-resource-dir)
     local destdir="${resourcedir}/lib/${LIB_TRIPLE}"
     local builddir="${B_COMPILERRT}/${ARCH_TRIPLE}"
@@ -53,6 +55,9 @@ do_install() {
 
     install -d ${destdir}
     mkdir -p ${builddir}
+
+    echo "${llvmversion}"
+    echo "${resourcedir}"
 
     local ccflags="--target=${target} ${ARCH_FLAGS} -nostdinc -isystem ${sysroot}/include"
     ${CC} ${ccflags} -c ${S_CRT}/crtbegin.c -o ${destdir}/clang_rt.crtbegin.o

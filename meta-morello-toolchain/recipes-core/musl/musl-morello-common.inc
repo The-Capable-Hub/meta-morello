@@ -13,8 +13,8 @@ SRC_URI = " \
     file://files/compiler_rt.cmake \
 	"
 
-# morello-release-1.7
-SRCREV    = "acfb827ad04d98ec5c0f558932e29b3c76de3093"
+# morello-release-1.8.1
+SRCREV    = "e7f332a23c27de93f27653261ce0cf109b780704"
 SRCBRANCH = "morello/master"
 
 LIC_FILES_CHKSUM  = "file://COPYRIGHT;md5=b03f1cc25363d094011f8f4fd8bcfb68"
