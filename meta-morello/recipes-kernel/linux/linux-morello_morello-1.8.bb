@@ -2,7 +2,7 @@ require linux-morello.inc
 
 LIC_FILES_CHKSUM  = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 
-SRCREV    = "fa6de65a2f2c6f3ef778e4dd46d1509591585221"
+SRCREV    = "96c45a786534d894387e17ed60e4d31d33911567"
 
 LINUX_VERSION           = "6.7"
 LINUX_VERSION_EXTENSION = "-yocto-purecap"
