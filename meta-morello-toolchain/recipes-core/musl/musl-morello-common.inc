@@ -13,8 +13,8 @@ SRC_URI = " \
     file://files/compiler_rt.cmake \
 	"
 
-# morello-release-1.8.1
-SRCREV    = "e7f332a23c27de93f27653261ce0cf109b780704"
+# morello-release-1.9
+SRCREV    = "e379080e966573c79096f80d89e5b42f469ac8d1"
 SRCBRANCH = "morello/master"
 
 LIC_FILES_CHKSUM  = "file://COPYRIGHT;md5=b03f1cc25363d094011f8f4fd8bcfb68"
@@ -43,22 +43,6 @@ CONFIGUREOPTS = " \
     --disable-libshim \
 "
 
-COMPILERRT_CMAKE = "-Wno-dev \
-    -DCMAKE_TOOLCHAIN_FILE=compiler_rt.cmake \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DLLVM_CONFIG_PATH='${LLVM_CONFIG}' \
-    -DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
-    -DCMAKE_SKIP_BUILD_RPATH=OFF \
-    -DCMAKE_BUILD_WITH_INSTALL_RPATH=ON \
-    -DLLVM_TARGETS_TO_BUILD='AArch64' \
-    -DLLVM_ENABLE_ASSERTIONS=OFF \
-    -DBUILD_SHARED_LIBS=ON \
-    -DCOMPILER_RT_BUILD_BUILTINS=ON \
-    -DCOMPILER_RT_BUILD_SANITIZERS=OFF \
-    -DCOMPILER_RT_BUILD_XRAY=OFF \
-    -DCOMPILER_RT_BUILD_LIBFUZZER=OFF \
-    -DCOMPILER_RT_BUILD_PROFILE=OFF \
-"
 do_configure() {
     export CFLAGS=""
     local config="${CONFIGUREOPTS}"
