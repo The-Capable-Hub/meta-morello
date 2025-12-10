@@ -15,7 +15,7 @@ RPROVIDES:${PN} += "busybox-morello"
 
 SRC_URI = " \
     git://git.morello-project.org/morello/morello-busybox;protocol=https;branch=${SRCBRANCH} \
-    file://files/0001-Remove-elf-patch-append-toolchain-with-relative-path.patch \
+    file://files/0001-makefile-add-LLVM_PATH.patch \
     "
 
 PV  = "git${SRCPV}"

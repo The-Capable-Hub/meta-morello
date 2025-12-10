@@ -1,0 +1,51 @@
+From 386f33e5bde5f8a33042c3e13a90ac71938c0cbb Mon Sep 17 00:00:00 2001
+From: Pawel Zalewski <pawel.zalewski@thecapablehub.org>
+Date: Mon, 8 Dec 2025 16:07:39 +0000
+Subject: [PATCH] makefile: add LLVM_PATH
+
+Signed-off-by: Pawel Zalewski <pawel.zalewski@thecapablehub.org>
+---
+ Makefile | 17 +++++++++--------
+ 1 file changed, 9 insertions(+), 8 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index 00bdade82..16eedeca5 100644
+--- a/Makefile
++++ b/Makefile
+@@ -144,7 +144,8 @@ MORELLO_TARGET		:= aarch64-linux-musl_purecap
+ MORELLO_FLAGS		:= -Wno-cheri-inefficient -march=morello -mabi=purecap
+ MUSL_HOME		:= ../../musl-bin
+ KHEADERS		:= ../morello-linux-headers/usr/include/
+-CLANG_RESOURCE_DIR	:= $(shell clang -print-resource-dir)
++CLANG_RESOURCE_DIR	:= $(shell ${LLVM_PATH}/clang -print-resource-dir)
++
+ 
+ export srctree objtree VPATH TOPDIR
+ 
+@@ -295,16 +296,16 @@ MAKEFLAGS += -rR
+ 
+ # Make variables (CC, etc...)
+ 
+-AS		= llvm-as
+-CC_		= clang
++AS		= ${LLVM_PATH}/llvm-as
++CC_		= ${LLVM_PATH}/clang
+ CC		= $(CC_) --target=${MORELLO_TARGET} --sysroot ${MUSL_HOME} ${MORELLO_FLAGS}
+ LD		= $(CC) -fuse-ld=lld -rtlib=compiler-rt
+ CPP		= $(CC) -E
+-AR		= llvm-ar
+-NM		= llvm-nm
+-STRIP		= llvm-strip
+-OBJCOPY		= llvm-objcopy
+-OBJDUMP		= llvm-objdump
++AR		= ${LLVM_PATH}/llvm-ar
++NM		= ${LLVM_PATH}/llvm-nm
++STRIP		= ${LLVM_PATH}/llvm-strip
++OBJCOPY		= ${LLVM_PATH}/llvm-objcopy
++OBJDUMP		= ${LLVM_PATH}/llvm-objdump
+ PKG_CONFIG	?= $(CROSS_COMPILE)pkg-config
+ AWK		= awk
+ GENKSYMS	= scripts/genksyms/genksyms
+-- 
+2.43.0
+
