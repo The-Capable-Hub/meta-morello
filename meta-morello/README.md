@@ -70,7 +70,7 @@ Known limitations
 Contributing
 ------------
 
-We accept patches through the mailing list only.  
+We accept patches through the mailing list or via PR to this repo.  
 
 https://op-lists.linaro.org/mailman3/lists/linux-morello-distros.op-lists.linaro.org/
 
