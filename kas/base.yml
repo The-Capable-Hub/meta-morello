@@ -1,11 +1,11 @@
 header:
-  version: 11
+  version: 16
 
 distro: poky
 
 defaults:
   repos:
-    refspec: kirkstone
+    branch: kirkstone
 
 repos:
   meta-morello:
@@ -15,12 +15,14 @@ repos:
 
   meta-arm:
     url: https://git.yoctoproject.org/meta-arm
+    commit: c3e9fb12aa31d25e33d8392c4a233ed1275a3278
     layers:
       meta-arm:
       meta-arm-toolchain:
 
   poky:
     url: https://git.yoctoproject.org/git/poky
+    commit: 2c05660b21c7cc1082aeac8b75d8a2d82e249f63
     layers:
       meta:
       meta-poky:
