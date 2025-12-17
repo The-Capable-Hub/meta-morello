@@ -9,9 +9,9 @@ PREFERRED_VERSION_scp-firmware       = "morello-2.1%"
 PREFERRED_VERSION_trusted-firmware-a = "morello-2.9"
 
 PREFERRED_PROVIDER_virtual/kernel = "linux-morello"
-PREFERRED_VERSION_virtual/kernel  = "morello-1.8"
+PREFERRED_VERSION_virtual/kernel  = "morello-master"
 
-PREFERRED_VERSION_musl            = "morello-1.8"
+PREFERRED_VERSION_musl            = "morello-1.9"
 
 GDBVERSION                        = "morello-11.0"
 

@@ -1,0 +1,145 @@
+name: main
+
+on:
+  push:
+    branches: 
+      - kirkstone
+
+  workflow_dispatch:
+
+jobs:
+   morello-soc:
+      runs-on: the-capable-hub-aws-ci
+      env:
+         BUILD_DIR: ${{github.workspace}}/volatile/${{ github.job }}
+      container:
+        image: capablehub/cheri-yocto-morello:latest
+
+      steps:
+         - name: Setup
+           run: |
+              sudo mkdir -p ${{env.BUILD_DIR}}
+              echo HOME=/home/ci | sudo tee -a $GITHUB_ENV
+              sudo ln -sf /home/ci ${{env.BUILD_DIR}}
+   
+         - name: Checkout layers
+           uses: actions/checkout@v4
+           with:
+              path: ${{env.BUILD_DIR}}
+   
+         - name: Build kas 
+           run: |
+            cd $BUILD_DIR
+            KASFILES=$(ci/jobs-to-kas "${{ github.job }}")
+            kas shell --update --force-checkout $KASFILES -c 'cat conf/*.conf'
+            kas build $KASFILES
+
+         - name: Upload build logs on failure
+           if: failure()
+           uses: actions/upload-artifact@v4
+           with:
+             name: failure-logs
+             path: |
+               ${{env.BUILD_DIR}}/build/tmp*/work*/**/temp/*.do_*.*
+
+         - name: Upload wic artifacts
+           uses: actions/upload-artifact@v4
+           with:
+              name: morello_artifacts_wic_${{ github.job }}
+              path: |
+                 ${{env.BUILD_DIR}}/build/tmp-soc/deploy/images/morello-soc/usb-image-morello-soc.wic
+
+         - name: Upload fimrware artifacts
+           uses: actions/upload-artifact@v4
+           with:
+              name: morello_artifacts_firmware_${{ github.job }}
+              path: |
+                 ${{env.BUILD_DIR}}/build/tmp-soc/deploy/images/morello-soc/board-firmware-sd-image.img
+
+
+   morello-fvp:
+      runs-on: the-capable-hub-aws-ci
+      env:
+         BUILD_DIR: ${{github.workspace}}/volatile/${{ github.job }}
+      container:
+        image: capablehub/cheri-yocto-morello:latest
+      strategy:
+        matrix:
+          testing:
+            - testimage
+
+      steps:
+         - name: Setup
+           run: |
+              sudo mkdir -p ${{env.BUILD_DIR}}
+              echo HOME=/home/ci | sudo tee -a $GITHUB_ENV
+              sudo ln -sf /home/ci ${{env.BUILD_DIR}}
+      
+         - name: Checkout layers
+           uses: actions/checkout@v4
+           with:
+              path: ${{env.BUILD_DIR}}
+   
+         - name: Build kas 
+           run: |
+            cd $BUILD_DIR
+            KASFILES=$(ci/jobs-to-kas "${{ github.job }}: [${{ matrix.testing }}]")
+            echo $KASFILES
+            kas shell --update --force-checkout $KASFILES -c 'cat conf/*.conf'
+            kas build $KASFILES
+
+         - name: Upload build logs on failure
+           if: failure()
+           uses: actions/upload-artifact@v4
+           with:
+             name: failure-logs
+             path: |
+               ${{env.BUILD_DIR}}/build/tmp*/work*/**/temp/*.do_*.*
+
+         - name: Upload wic artifacts
+           uses: actions/upload-artifact@v4
+           with:
+              name: morello_artifacts_wic_${{ github.job }}
+              path: |
+                 ${{env.BUILD_DIR}}/build/tmp-fvp/deploy/images/morello-fvp/usb-image-morello-fvp.wic
+
+         - name: Upload firmware artifacts
+           uses: actions/upload-artifact@v4
+           with:
+              name: morello_artifacts_firmware_${{ github.job }}
+              path: |
+                 ${{env.BUILD_DIR}}/build/tmp-fvp/deploy/images/morello-fvp/board-firmware-sd-image.img
+
+   check-layers:
+      runs-on: the-capable-hub-aws-ci
+      env:
+          BUILD_DIR: ${{github.workspace}}/volatile/${{ github.job }}
+      container:
+        image: capablehub/cheri-yocto-morello:latest
+
+      strategy:
+        matrix:
+          layer:
+            - meta-morello
+            - meta-morello-toolchain
+    
+      steps:
+        - name: Setup
+          run: |
+              sudo mkdir -p ${{env.BUILD_DIR}}
+              echo HOME=/home/ci | sudo tee -a $GITHUB_ENV
+              sudo ln -sf /home/ci ${{env.BUILD_DIR}}
+   
+        - name: Checkout layers
+          uses: actions/checkout@v4
+          with:
+              path: ${{env.BUILD_DIR}}/${{ matrix.layer }} 
+        
+        - name: Check layer
+          run: |
+            layer_dir=${BUILD_DIR}/${{ matrix.layer }}
+            cd ${layer_dir} 
+            ls 
+            echo ${layer_dir}
+            kas shell --update --force-checkout ${layer_dir}/kas/base.yml --command \
+              "yocto-check-layer-wrapper ${layer_dir}/${{ matrix.layer }} -n --dependency ${layer_dir}/meta-* ${layer_dir}/meta-arm/meta-arm ${layer_dir}/meta-arm/meta-arm-toolchain"

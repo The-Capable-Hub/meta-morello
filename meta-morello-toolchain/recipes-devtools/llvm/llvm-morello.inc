@@ -8,9 +8,9 @@ OUTPUTS_NAME = "llvm-morello"
 DEPENDS      = "zlib-native ninja-native ${COMPILER}-native"
 
 SRC_URI = "git://git.morello-project.org/morello/llvm-project;protocol=https;branch=${SRCBRANCH}"
-SRCREV  = "ae1b1aad04c1c579db8c09d1049dc0553821fbc2"
+SRCREV  = "1515185132d1cd510dac5225af0196ce6c9487d4"
 
-SRCBRANCH        = "morello/release-1.8"
+SRCBRANCH        = "morello/release-1.9"
 LIC_FILES_CHKSUM = "file://LICENSE.TXT;md5=8a15a0759ef07f2682d2ba4b893c9afe"
 
 S             = "${WORKDIR}/git/llvm"
@@ -21,7 +21,7 @@ SYSROOT_DIRS_NATIVE += "/${OUTPUTS_NAME}"
 
 COMPILER     = "llvm-13.0.1"
 
-LLVM_PROJECTS         = "libcxx;libcxxabi;compiler-rt;libunwind;llvm;clang;lld;lldb"
+LLVM_PROJECTS         = "clang;lld;lldb;compiler-rt"
 LLVM_BUILD_DIR        = "${WORKDIR}/${OUTPUTS_NAME}-build"
 
 NATIVE_LLVM_PATH  = "${STAGING_LIBDIR_NATIVE}/${COMPILER}/bin"
@@ -60,6 +60,7 @@ EXTRA_OECMAKE += "-Wno-dev -G Ninja \
     -DCOMPILER_RT_BUILD_PROFILE=OFF \
     -DLLVM_TARGETS_TO_BUILD='${LLVM_TARGETS_TO_BUILD}' \
     -DLLVM_ENABLE_PROJECTS='${LLVM_PROJECTS}' \
+    -DLLVM_ENABLE_RUNTIMES='libcxx;libcxxabi;libunwind' \
     -DLIBCXX_CXX_ABI='libcxxabi' \
     -DLIBCXX_CXX_ABI_INCLUDE_PATHS='${WORKDIR}/git/libcxxabi/include' \
     -DLIBCXXABI_USE_LLVM_UNWINDER=ON \
@@ -112,22 +113,35 @@ do_compile() {
 do_install() {
   cd ${LLVM_BUILD_DIR}
   cmake --build . --target install
-  install -d ${LLVM_SHARED_SOURCE}
 }
 
 python do_symlink() {
     s = d.getVar("S_git")
-    if s[-1] == '/':
-        # drop trailing slash, so that os.symlink(src, s) doesn't use s as directory name and fail
-        s=s[:-1]
+    if s and s[-1] == '/':
+        s = s[:-1]
+    
     src = d.getVar("LLVM_SHARED_SOURCE")
-    if s != src:
-        bb.utils.mkdirhier(src)
+    
+    if not s or not src:
+        bb.warn("S_git or LLVM_SHARED_SOURCE not set, skipping symlink")
+        return
+    
+    if s == src:
+        bb.debug(1, "S_git and LLVM_SHARED_SOURCE are the same, no symlink needed")
+        return
+
+    import os
+
+    # Remove existing symlink/directory if it exists
+    if os.path.islink(src):
+        os.unlink(src)
+    elif os.path.exists(src):
         bb.utils.remove(src, recurse=True)
-        os.symlink(s, src)
-    else:
-        import shutil
-        shutil.move(s, src)
-        os.symlink(src, s)
+    
+    bb.utils.mkdirhier(os.path.dirname(src))
+        
+    # Create symlink
+    os.symlink(s, src)
 }
+
 addtask do_symlink after do_install before do_build
