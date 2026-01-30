@@ -23,7 +23,7 @@ require ${MACHINE_SCP_REQUIRE}
 
 INHIBIT_DEFAULT_DEPS = "1"
 
-DEPENDS           += "virtual/arm-none-eabi-gcc-native virtual/board-firmware"
+DEPENDS           += "gcc-arm-none-eabi-native virtual/board-firmware"
 PROVIDES          += "virtual/${OUTPUTS_NAME}"
 
 SRC_URI            = "gitsm://git.morello-project.org/morello/scp-firmware.git;protocol=https;branch=${SRCBRANCH}"
