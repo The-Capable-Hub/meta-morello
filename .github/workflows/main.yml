@@ -23,7 +23,7 @@ jobs:
               sudo ln -sf /home/ci ${{env.BUILD_DIR}}
    
          - name: Checkout layers
-           uses: actions/checkout@v4
+           uses: actions/checkout@v5
            with:
               path: ${{env.BUILD_DIR}}
    
@@ -36,21 +36,21 @@ jobs:
 
          - name: Upload build logs on failure
            if: failure()
-           uses: actions/upload-artifact@v4
+           uses: actions/upload-artifact@v6
            with:
              name: failure-logs
              path: |
                ${{env.BUILD_DIR}}/build/tmp*/work*/**/temp/*.do_*.*
 
          - name: Upload wic artifacts
-           uses: actions/upload-artifact@v4
+           uses: actions/upload-artifact@v6
            with:
               name: morello_artifacts_wic_${{ github.job }}
               path: |
                  ${{env.BUILD_DIR}}/build/tmp-soc/deploy/images/morello-soc/usb-image-morello-soc.wic
 
          - name: Upload fimrware artifacts
-           uses: actions/upload-artifact@v4
+           uses: actions/upload-artifact@v6
            with:
               name: morello_artifacts_firmware_${{ github.job }}
               path: |
@@ -76,7 +76,7 @@ jobs:
               sudo ln -sf /home/ci ${{env.BUILD_DIR}}
       
          - name: Checkout layers
-           uses: actions/checkout@v4
+           uses: actions/checkout@v5
            with:
               path: ${{env.BUILD_DIR}}
    
@@ -90,21 +90,21 @@ jobs:
 
          - name: Upload build logs on failure
            if: failure()
-           uses: actions/upload-artifact@v4
+           uses: actions/upload-artifact@v6
            with:
              name: failure-logs
              path: |
                ${{env.BUILD_DIR}}/build/tmp*/work*/**/temp/*.do_*.*
 
          - name: Upload wic artifacts
-           uses: actions/upload-artifact@v4
+           uses: actions/upload-artifact@v6
            with:
               name: morello_artifacts_wic_${{ github.job }}
               path: |
                  ${{env.BUILD_DIR}}/build/tmp-fvp/deploy/images/morello-fvp/usb-image-morello-fvp.wic
 
          - name: Upload firmware artifacts
-           uses: actions/upload-artifact@v4
+           uses: actions/upload-artifact@v6
            with:
               name: morello_artifacts_firmware_${{ github.job }}
               path: |
@@ -131,7 +131,7 @@ jobs:
               sudo ln -sf /home/ci ${{env.BUILD_DIR}}
    
         - name: Checkout layers
-          uses: actions/checkout@v4
+          uses: actions/checkout@v5
           with:
               path: ${{env.BUILD_DIR}}/${{ matrix.layer }} 
         
