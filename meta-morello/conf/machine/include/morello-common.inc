@@ -5,6 +5,7 @@ MACHINEOVERRIDES =. "morello"
 PREFERRED_VERSION_board-firmware     = "morello-1.8"
 PREFERRED_VERSION_edk2-firmware      = "morello-2.7"
 PREFERRED_VERSION_scp-firmware       = "morello-2.1%"
+PREFERRED_VERSION_fiptool-native     = "2.7"
 
 PREFERRED_VERSION_trusted-firmware-a = "morello-2.9"
 
