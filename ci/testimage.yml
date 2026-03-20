@@ -7,5 +7,5 @@ local_conf_header:
 
     IMAGE_CLASSES:append = " testimage"
 
-    TEST_TARGET = "OEFVPSerialTarget"
-    TEST_SUITES = "linuxboot"
+    TEST_TARGET = "OEFVPTarget"
+    TEST_SUITES = "fvp_boot"
