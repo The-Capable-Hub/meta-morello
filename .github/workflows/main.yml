@@ -3,7 +3,7 @@ name: main
 on:
   push:
     branches: 
-      - kirkstone
+      - scarthgap
 
   workflow_dispatch:
 
