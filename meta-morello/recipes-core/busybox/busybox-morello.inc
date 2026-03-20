@@ -21,6 +21,8 @@ SRC_URI = " \
 PV  = "git${SRCPV}"
 S   = "${WORKDIR}/git"
 
+DEBUG_PREFIX_MAP:remove = "-fcanon-prefix-map"
+
 EXTRA_OEMAKE = "\
                 MUSL_HOME='${STAGING_DIR_TARGET}${PURECAP_SYSROOT_DIR}${prefix}' \
                 KHEADERS='${STAGING_DIR_TARGET}${PURECAP_SYSROOT_DIR}${prefix}/src/linux-headers-morello/include' \
