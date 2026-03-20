@@ -8,8 +8,6 @@ SECTION            = "kernel"
 
 TOOLCHAIN          = "${MORELLO_TOOLCHAIN}"
 
-FILESEXTRAPATHS:prepend := "${THISDIR}:${THISDIR}/${PN}:"
-
 DEPENDS                 += "rsync-native"
 PROVIDES                += "virtual/${OUTPUTS_NAME}"
 
@@ -17,12 +15,13 @@ DEPENDS:remove:toolchain-llvm-morello        = "virtual/musl-morello"
 RDEPENDS:${PN}:remove:toolchain-llvm-morello = " musl"
 
 SRC_URI = " \
-    git://git.morello-project.org/morello/kernel/linux;protocol=https;nobranch=1  \
-    file://netfilter.cfg \
-    "
+	git://git.morello-project.org/morello/kernel/linux;name=machine;protocol=https;nobranch=1  \
+	git://git.yoctoproject.org/yocto-kernel-cache;type=kmeta;name=meta;branch=yocto-6.6;destsuffix=${KMETA};protocol=https \
+"
 
 PV  = "${LINUX_VERSION}+git${SRCPV}"
 S   = "${WORKDIR}/git"
+KMETA = "kernel-meta"
 
 BUILD_CC  = "${LLVM_PATH}/clang"
 BUILD_CPP = "${LLVM_PATH}/clang"
@@ -36,6 +35,7 @@ ARCH = "arm64"
 
 LINUX_KERNEL_TYPE     ?= "standard"
 
+KERNEL_EXTRA_FEATURES ?= "features/net_sched/net_sched.scc"
 KERNEL_FEATURES:append = " ${KERNEL_EXTRA_FEATURES}"
 
 KBUILD_DEFCONFIG = "morello_transitional_pcuabi_defconfig"
@@ -50,5 +50,5 @@ SYSROOT_DIRS += "${PURECAP_SYSROOT_DIR}${prefix}/src/linux-headers-morello/inclu
 
 do_install:append() {
 	install -d ${D}${PURECAP_SYSROOT_DIR}${prefix}/src/linux-headers-morello
-    oe_runmake headers_install ARCH=arm64 INSTALL_HDR_PATH=${D}${PURECAP_SYSROOT_DIR}${prefix}/src/linux-headers-morello
+	oe_runmake headers_install ARCH=arm64 INSTALL_HDR_PATH=${D}${PURECAP_SYSROOT_DIR}${prefix}/src/linux-headers-morello
 }
