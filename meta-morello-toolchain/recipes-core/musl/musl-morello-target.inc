@@ -6,6 +6,8 @@ TOOLCHAIN          = "${MORELLO_TOOLCHAIN}"
 
 MUSL_LDSO_ARCH = "aarch64_purecap"
 
+DEBUG_PREFIX_MAP:remove = "-fcanon-prefix-map"
+
 FILES:${PN}  = "${PURECAP_SYSROOT_DIR}"
 
 FILES:${PN} += "${PURECAP_SYSROOT_DIR}${datadir} ${PURECAP_SYSROOT_DIR}${bindir} ${PURECAP_SYSROOT_DIR}${libdir}"
