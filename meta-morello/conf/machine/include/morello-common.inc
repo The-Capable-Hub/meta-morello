@@ -22,6 +22,8 @@ APP_DIR ?= "pure-cap-apps"
 
 KERNEL_IMAGETYPE       = "Image"
 
+# Having an image name suffix breaks the fvpconf handling
+IMAGE_NAME_SUFFIX       = ""
 IMAGE_FSTYPES          += "wic"
 
 WKS_FILE               ?= "morello-efidisk.wks"
