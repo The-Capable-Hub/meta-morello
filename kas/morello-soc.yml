@@ -1,7 +1,6 @@
 header:
-  version: 11
+  version: 16
   includes:
-    - base.yml
+    - kas/base.yml
+
 machine: morello-soc
-target:
-  - core-image-minimal

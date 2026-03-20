@@ -5,7 +5,7 @@ distro: poky
 
 defaults:
   repos:
-    branch: kirkstone
+    branch: scarthgap
 
 repos:
   meta-morello:
@@ -15,14 +15,14 @@ repos:
 
   meta-arm:
     url: https://git.yoctoproject.org/meta-arm
-    commit: c3e9fb12aa31d25e33d8392c4a233ed1275a3278
+    commit: a81c19915b5b9e71ed394032e9a50fd06919e1cd
     layers:
       meta-arm:
       meta-arm-toolchain:
 
   poky:
     url: https://git.yoctoproject.org/git/poky
-    commit: 2c05660b21c7cc1082aeac8b75d8a2d82e249f63
+    commit: b301218f4da7793624db3545efd8bf66888b77b0
     layers:
       meta:
       meta-poky:
