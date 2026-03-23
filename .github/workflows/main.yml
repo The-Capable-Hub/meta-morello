@@ -4,6 +4,9 @@ on:
   push:
     branches: 
       - scarthgap
+    paths-ignore:
+      - 'README.md'
+      - '.github/workflows/release.yml'
 
   workflow_dispatch:
 
