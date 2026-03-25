@@ -1,0 +1,12 @@
+targets:
+  main:
+    resources:
+      RawSerialPort:
+        port: "/dev/ttyUSB2"
+    drivers:
+      SerialDriver: {}
+      ShellDriver:
+        prompt: 'root@morello-soc:[^ ]+ '
+        login_prompt: ' login: '
+        username: 'root'
+        login_timeout: 500
