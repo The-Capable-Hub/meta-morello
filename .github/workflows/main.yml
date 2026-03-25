@@ -59,6 +59,45 @@ jobs:
               path: |
                  ${{env.BUILD_DIR}}/build/tmp-soc/deploy/images/morello-soc/board-firmware-sd-image.img
 
+   morello-soc-test:
+      name: "morello-soc hardware test"
+      needs: morello-soc
+
+      # Ensure we have access to the Morello board in The Capable Hub's farm
+      runs-on: [ the-capable-hub-farm, board:Morello ]
+      steps:
+         - name: Check out repository
+           uses: actions/checkout@v6
+
+         - name: Download wic artifact
+           uses: actions/download-artifact@v8
+           with:
+              name: morello_artifacts_wic_morello-soc
+
+         - name: Download firmware artifact
+           uses: actions/download-artifact@v8
+           with:
+              name: morello_artifacts_firmware_morello-soc
+
+         - name: Flash firmware
+           run: |
+              sudo apt update && sudo apt install -y bmap-tools
+
+              sudo usbrelay HURTM_1=0
+              sudo dd if=board-firmware-sd-image.img of=/dev/disk/by-id/usb-ARM_M1SDP_500541683007-0:0
+              sudo bmaptool copy --nobmap usb-image-morello-soc.wic /dev/disk/by-id/usb-SanDisk_Cruzer_Blade_00016104110624091916-0:0
+              sync
+              sudo usbrelay HURTM_1=1
+
+         - name: Boot and test firmware
+           shell: bash
+           run: |
+              cd ci/labgrid
+              source /opt/labgrid-env/bin/activate
+
+              stty -F /dev/ttyUSB0 115200
+              echo -e "\n\nREBOOT" | sudo tee /dev/ttyUSB0
+              sudo -E `which pytest` --lg-env local.yaml --capture=no test_shell.py
 
    morello-fvp:
       runs-on: the-capable-hub-aws-ci
