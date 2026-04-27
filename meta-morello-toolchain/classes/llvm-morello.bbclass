@@ -18,7 +18,7 @@ INHIBIT_DEFAULT_DEPS:toolchain-llvm-morello  = "1"
 INHIBIT_PACKAGE_STRIP:toolchain-llvm-morello = "1"
 
 TC_DEPENDS:append:toolchain-llvm-morello              = " virtual/llvm-morello-native"
-TC_DEPENDS:append:toolchain-llvm-morello:class-target = " virtual/llvm-morello-runtime-native virtual/musl-morello"
+TC_DEPENDS:append:toolchain-llvm-morello:class-target = " virtual/llvm-morello-runtime-native virtual/musl-morello "
 
 DEPENDS:append:toolchain-llvm-morello = "${TC_DEPENDS}"
 

@@ -60,12 +60,10 @@ EXTRA_OECMAKE += "-Wno-dev -G Ninja \
     -DCOMPILER_RT_BUILD_PROFILE=OFF \
     -DLLVM_TARGETS_TO_BUILD='${LLVM_TARGETS_TO_BUILD}' \
     -DLLVM_ENABLE_PROJECTS='${LLVM_PROJECTS}' \
-    -DLLVM_ENABLE_RUNTIMES='libcxx;libcxxabi;libunwind' \
     -DLIBCXX_CXX_ABI='libcxxabi' \
     -DLIBCXX_CXX_ABI_INCLUDE_PATHS='${WORKDIR}/git/libcxxabi/include' \
     -DLIBCXXABI_USE_LLVM_UNWINDER=ON \
     -DLIBCXXABI_USE_COMPILER_RT=ON \
-    -DLIBUNWIND_ENABLE_THREADS=ON \
     -DCLANG_DEFAULT_RTLIB='compiler-rt' \
     -DCLANG_DEFAULT_CXX_STDLIB='libc++' \
     -DCLANG_DEFAULT_OBJCOPY='llvm-objcopy'\
@@ -85,6 +83,8 @@ EXTRA_OECMAKE += "-Wno-dev -G Ninja \
     -DLLVM_OPTIMIZED_TABLEGEN=FALSE \
     -DLLVM_ENABLE_ZLIB=FORCE_ON \
     -DLLVM_ENABLE_LIBXML2=FALSE \
+    -DLIBUNWIND_ENABLE_THREADS=ON \
+    -DLLVM_ENABLE_RUNTIMES='libcxx;libcxxabi;libunwind' \
 "
 
 INSANE_SKIP_${PN}           = "already-stripped"

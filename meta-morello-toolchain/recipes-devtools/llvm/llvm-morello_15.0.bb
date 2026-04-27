@@ -54,6 +54,9 @@ INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 do_install() {
     install -d ${D}${prefix}  ${D}${libdir} ${D}${bindir} ${D}${includedir} ${D}${datadir} ${D}${libexecdir}
     cp -rf ${S}/lib/* ${D}${libdir}
+    rm ${D}${libdir}/libc++.*
+    rm ${D}${libdir}/libunwind.*
+    rm ${D}${libdir}/libc++abi.*
     cp -rf ${S}/bin/* ${D}${bindir}
     cp -rf ${S}/include/* ${D}${includedir}
     cp -rf ${S}/share/* ${D}${datadir}
