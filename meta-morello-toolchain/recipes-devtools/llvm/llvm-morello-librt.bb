@@ -6,8 +6,9 @@ TOOLCHAIN      = "${MORELLO_TOOLCHAIN}"
 DESCRIPTION    = "Runtime libraries for C++. Built AFTER musl \
                     and clang."
 
-PROVIDES    += "virtual/llvm-morello-librt"
-DEPENDS += " llvm-morello musl-morello-native "
+PROVIDES        += "virtual/llvm-morello-librt"
+DEPENDS         += " llvm-morello "
+RDEPENDS:${PN}  += " llvm-morello "
 RDEPENDS:${PN}:remove:toolchain-llvm-morello = " musl "
 
 do_install[depends] += "llvm-morello-native:do_symlink"
@@ -44,7 +45,7 @@ BUILD_LD          = "${LLVM_PATH}/ld.lld"
 BUILD_LTO         = "-fuse-ld=lld"
 BUILD_HOSTCC      = "${LLVM_PATH}/clang"
 
-BUILD_FLAGS = "--sysroot=${SYSROOT} ${TFLAGS} -isystem ${sysroot}/include -fdebug-prefix-map=${WORKDIR}= -fmacro-prefix-map=${WORKDIR}= "
+BUILD_FLAGS = "--sysroot=${SYSROOT} ${TFLAGS} -isystem ${SYSROOT}/include -fdebug-prefix-map=${WORKDIR}= -fmacro-prefix-map=${WORKDIR}= "
 
 LIBUNWIND_HEADERS = "${LLVM_SHARED_SOURCE}/libunwind/include"
 LIBCXX_HEADERS = "${STAGING_INCIDR}/c++/v1"
@@ -97,7 +98,7 @@ do_install() {
     export CFLAGS=""
 
     local target="${LIB_TRIPLE}"
-    local ccflags="--target=${target} ${ARCH_FLAGS} -nostdinc -isystem ${sysroot}/include"
+    local ccflags="--target=${target} ${ARCH_FLAGS} -nostdinc -isystem ${SYSROOT}/include"
     local llvmversion=$(${CC} ${ccflags} --version)
     local resourcedir=$(${CC} -print-resource-dir)
     local destdir="${resourcedir}/usr/lib/${LIB_TRIPLE}"
@@ -149,6 +150,7 @@ EOF
 }
 
 FILES:${PN} = "${libdir}/${LIB_TRIPLE}/lib/*.so"
+FILES:${PN} = "${libdir}/${LIB_TRIPLE}"
 FILES:${PN} += "${libdir}/${LIB_TRIPLE}/include/"
 FILES:${PN}-staticdev = "${libdir}/${LIB_TRIPLE}/lib/*.a"
 FILES:${PN}-dev = "${libdir}/${LIB_TRIPLE}/lib/*.so*"
