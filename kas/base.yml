@@ -14,6 +14,7 @@ repos:
       meta-morello-toolchain:
 
   meta-arm:
+    path: layers/meta-arm
     url: https://git.yoctoproject.org/meta-arm
     commit: a81c19915b5b9e71ed394032e9a50fd06919e1cd
     layers:
@@ -21,6 +22,7 @@ repos:
       meta-arm-toolchain:
 
   poky:
+    path: layers/poky
     url: https://git.yoctoproject.org/git/poky
     commit: b301218f4da7793624db3545efd8bf66888b77b0
     layers:
