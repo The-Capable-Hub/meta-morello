@@ -58,7 +58,7 @@ CC_PURECAP_FLAGS += "-isystem ${STAGING_DIR_TARGET}${PURECAP_SYSROOT_DIR}/usr/sr
 CC:append:toolchain-llvm-morello:class-target      = " ${CC_PURECAP_FLAGS}"
 CXX:append:toolchain-llvm-morello:class-target     = " ${CC_PURECAP_FLAGS}"
 
-LD_PURECAP_FLAGS = "-L${STAGING_DIR_TARGET}${PURECAP_SYSROOT_DIR}/usr/lib -rtlib=compiler-rt -Wl,-rpath=${PURECAP_SYSROOT_DIR}/usr/lib "
+LD_PURECAP_FLAGS = "-L${STAGING_DIR_TARGET}${PURECAP_SYSROOT_DIR}/usr/lib -rtlib=compiler-rt -Wl,-rpath=${PURECAP_SYSROOT_DIR}/usr/lib -B${STAGING_DIR_TARGET}${PURECAP_SYSROOT_DIR}/usr/lib "
 
 LDFLAGS:append:toolchain-llvm-morello:class-target = " ${LD_PURECAP_FLAGS}"
 
