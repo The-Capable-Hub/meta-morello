@@ -2,8 +2,6 @@ name: main
 
 on:
   push:
-    branches: 
-      - main
     paths-ignore:
       - 'README.md'
       - '.github/workflows/release.yml'
@@ -64,7 +62,7 @@ jobs:
       needs: morello-soc
 
       # Ensure we have access to the Morello board in The Capable Hub's farm
-      runs-on: [ the-capable-hub-farm, board:Morello ]
+      runs-on: [ the-capable-hub-farm, board:Morello2 ]
       steps:
          - name: Check out repository
            uses: actions/checkout@v6
